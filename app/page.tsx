@@ -1,15 +1,24 @@
-import Link from "next/link";
+import { Amiri } from "next/font/google";
 
-export default function Home() {
+async function ayat() {
+  const res = await fetch("http://api.alquran.cloud/v1/ayah/262/editions/quran-uthmani,id.indonesian", { cache: "no-store" });
+  const data = await res.json();
+  return data
+}
+
+const amiri = Amiri({
+  subsets: ["arabic"],
+  weight: ["400"]
+})
+
+export default async function Page() {
+  let ayatk = await ayat();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Dashboard
+    <main className="flex min-h-screen flex-col items-center justify-between">
 
-      <div className="flex justify-between">
-        <Link href={"/shalat"} >Shalat</Link>
-        <Link href={"/al-qur_an"} >Al-Qur'an</Link>
-        <Link href={"/hadits"} >Hadits</Link>
-        <Link href={"/asmaulhusna"} >Asmaul Husna</Link>
+      Al-Qur'an Nul Karim
+      <div className={amiri.className}>
+        {ayatk["data"][0]["text"]}
       </div>
     </main>
   );
