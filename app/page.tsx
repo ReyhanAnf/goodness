@@ -5,7 +5,7 @@
 // })
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-
+import  Link  from "next/link";
 
 export default async function Page() {
   return (
@@ -67,7 +67,7 @@ export default async function Page() {
       </div>
       <div className="content w-full dark:bg-slate-950 rounded-t-3xl relative bg-slate-50 bg-opacity-5 backdrop-blur-sm z-20 pt-4 top-12 px-4 ">
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-3 items-center bg-opacity-50  p-4">
-          <div className="menu-dash-item dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50">Al-Quran</div>
+          <Link href={"/al-qur_an"} className="menu-dash-item dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50">Al-Quran</Link>
           <div className="menu-dash-item dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50">Hadits</div>
           <div className="menu-dash-item dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50">Asmaul Husna</div>
           <div className="menu-dash-item dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50">Sholat dan Doa</div>
