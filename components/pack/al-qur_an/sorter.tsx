@@ -31,7 +31,7 @@ export function Sorter() {
         </div>
       </TabsContent>
       <TabsContent value="surat">
-        <div className="">
+        <div className="h-svh overflow-y-scroll">
           <ListSurah />
         </div>
       </TabsContent>

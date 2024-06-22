@@ -18,7 +18,7 @@ import Link from "next/link"
 
 export default function Navbar() {
   return (
-    <Menubar className="fixed bottom-0 w-full h-14 rounded-3xl bg-gradient-to-tr from-slate-50 to-cyan-200 dark:from-slate-950 dark:to-cyan-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
+    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-cyan-200 dark:from-slate-950 dark:to-cyan-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
       <MenubarMenu>
         <MenubarTrigger>Home</MenubarTrigger>
         <MenubarContent>

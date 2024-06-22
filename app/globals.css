@@ -85,4 +85,7 @@
     .nextpray {
       @apply text-base font-bold dark:text-sky-100
     }
+    .gradientbg{
+      @apply bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] dark:to-black  dark:from-sky-950 dark:via-slate-900 from-cyan-100 via-sky-100 to-slate-50
+    }
   }
