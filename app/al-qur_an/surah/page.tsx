@@ -7,10 +7,10 @@ export default function Page({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
 
-  console.log(searchParams)
+  let tajweed = searchParams?.tajweed ? (searchParams.tajweed == "0" ? false : true) : true;
   return (
     <main className="w-full gradientbg">
-      <ReadOneSurah numbersurah={searchParams ? searchParams.number : 1} />
+      <ReadOneSurah numbersurah={searchParams ? (searchParams.number == "0" ? 1 : searchParams.number) : 1} tajweed={tajweed} />
     </main>
   )
 }

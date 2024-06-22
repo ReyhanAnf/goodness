@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -15,8 +17,11 @@ import {
 } from "@/components/ui/menubar"
 import { ModeToggle } from "./themebutton"
 import Link from "next/link"
+import { Button } from "../ui/button"
+import { useRouter } from "next/navigation"
 
 export default function Navbar() {
+  let rout = useRouter();
   return (
     <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-cyan-200 dark:from-slate-950 dark:to-cyan-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
       <MenubarMenu>
@@ -74,18 +79,7 @@ export default function Navbar() {
         <ModeToggle />
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
-        <MenubarContent>
-          <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-          </MenubarRadioGroup>
-          <MenubarSeparator />
-          <MenubarItem inset>Edit...</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem inset>Add Profile...</MenubarItem>
-        </MenubarContent>
+        <Button variant={"ghost"} onClick={() => { rout.back() }}>Back</Button>
       </MenubarMenu>
     </Menubar>
   )

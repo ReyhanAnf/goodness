@@ -8,9 +8,9 @@ import { Amiri } from "next/font/google"
 
 export const font_kitab = Amiri({
   weight: "400",
-  variable: "--font-sans",
   preload: true,
-  subsets: ["arabic"]
+  subsets: ["arabic"],
+  display: "auto"
 })
 
 export default async function ListSurah() {

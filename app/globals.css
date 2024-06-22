@@ -88,4 +88,7 @@
     .gradientbg{
       @apply bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] dark:to-black  dark:from-sky-950 dark:via-slate-900 from-cyan-100 via-sky-100 to-slate-50
     }
+    .gradientcard{
+      @apply dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50
+    }
   }
