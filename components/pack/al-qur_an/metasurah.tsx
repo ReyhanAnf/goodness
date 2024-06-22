@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function MetaSurah({ surah }: any) {
 
@@ -48,7 +49,9 @@ export default function MetaSurah({ surah }: any) {
 
   return (
     <div className="flex flex-row justify-between px-4">
-      <Link href={"/al-qur_an/surah/?number=" + (surahNumber - 1)}>prev</Link>
+      <Link href={"/al-qur_an/surah/?number=" + (surahNumber - 1)}>
+      <Image src={"/prev.svg"} alt="prev" width="25" height="25" />
+      </Link>
       <div className="flex flex-col gap-2 p-2">
         <CardTitle>{surahNumber}. {surahName}</CardTitle>
         <CardDescription>{tranSurahName}</CardDescription>
@@ -56,10 +59,14 @@ export default function MetaSurah({ surah }: any) {
         <Progress className="absolute left-0 bottom-0" value={scrolled} />
       </div>
       <div className="flex flex-col gap-3">
-        <Link href={"/al-qur_an/surah/?number=" + (surahNumber + 1)}>next</Link>
+        <Link href={"/al-qur_an/surah/?number=" + (surahNumber + 1)}>
+          <Image src={"/prev.svg"} alt="prev" className="rotate-180" width="25" height="25" />
+        </Link>
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline">=</Button>
+            <Button variant="ghost">
+              <Image src={"/setting.svg"} alt="setting" width="15" height="15" />
+            </Button>
           </PopoverTrigger>
           <PopoverContent className="mr-2 rounded-lg p-3 bg-slate-100 dark:bg-slate-900">
             <div className="grid gap-4">

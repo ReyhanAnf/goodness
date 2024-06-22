@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { font_kitab } from "./surah";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@radix-ui/react-accordion";
+import Image from "next/image";
 
 export default function AyahsCard({ surah, tajweed }: any) {
   const Tajweed = require("tajweed").Tajweed;
@@ -37,9 +38,9 @@ export default function AyahsCard({ surah, tajweed }: any) {
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
             <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-cyan-200/35 bg-opacity-20 ", font_kitab.className)}>{ayahs[index].numberInSurah}</CardTitle>
             <div className="flex w-1/3 gap-2 flex-row justify-end px-2 items-center">
-              <div>p</div>
-              <div>s</div>
-              <div>s</div>
+              <Image src={"/play-button.svg"} alt="play" height="10" width="10" />
+              <Image src={"/copy.svg"} alt="copy" height="10" width="10" />
+              <Image src={"/share.svg"} alt="copy" height="10" width="10" />
             </div>
           </CardHeader>
           <CardContent >
