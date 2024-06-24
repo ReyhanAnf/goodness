@@ -10,7 +10,7 @@ import Link from "next/link";
 export default async function Page() {
   return (
     <main className="flex flex-col h-screen w-full dark:from-black dark:to-slate-950 bg-gradient-to-b from-slate-50 from-60 to-cyan-50 to-40">
-      <div className="header w-full bg-gradient-to-b dark:from-sky-950 dark:to-slate-950 from-sky-800 to-slate-50 h-1/3">
+      <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3">
         <div className="w-full h-full">
           <Image alt="dashboard" src={"/dashboard.svg"} className="relative left-1/2 -translate-x-1/2 w-1/2 bg-opacity-75" width={100} height={50} />
           <div className="w-full z-50 absolute top-0 flex flex-col items-center p-4">
@@ -65,7 +65,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="content w-full dark:bg-slate-950 rounded-t-3xl relative bg-slate-50 bg-opacity-5 backdrop-blur-sm z-20 pt-4 top-12 px-4 ">
+      <div className="content w-full dark:bg-black rounded-t-3xl relative bg-slate-50 bg-opacity-5 backdrop-blur-sm pt-4 mt-16 mb-12 bottom-22 top-5 px-4 ">
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-3 items-center bg-opacity-50  p-4">
           <Link href={"/al-qur_an"} className="menu-dash-item gradientcard ">Al-Quran</Link>
           <div className="menu-dash-item gradientcard ">Hadits</div>

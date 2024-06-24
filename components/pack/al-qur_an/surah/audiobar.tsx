@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 
 
-export default function AudioBar({ link, identiti }: any) {
+export default function AudioBar({ link, playsaudio, setPlayaudio }: any) {
 
   const [audio, setAudio] = useState(new Audio(link));
   const [playing, setPlaying] = useState(false);
@@ -27,7 +27,6 @@ export default function AudioBar({ link, identiti }: any) {
       audio.removeEventListener('ended', () => setPlaying(false));
     };
   }, [playing]);
-
 
 
   return (

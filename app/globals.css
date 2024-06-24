@@ -80,15 +80,15 @@
       @apply p-4 m-1 bg-slate-300 bg-opacity-10 backdrop-blur-md rounded-lg shadow-md
     }
     .menu-dash-item {
-      @apply w-full h-44 rounded-lg flex flex-1 justify-center items-center text-center shadow-md
+      @apply w-full h-36 rounded-lg flex flex-1 justify-center items-center text-center shadow-md bg-opacity-45 backdrop-blur-sm
     }
     .nextpray {
       @apply text-base font-bold dark:text-sky-100
     }
     .gradientbg{
-      @apply bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] dark:to-black  dark:from-sky-950 dark:via-slate-900 from-cyan-100 via-sky-100 to-slate-50
+      @apply bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]   dark:from-emerald-950 dark:via-gray-950  dark:to-black from-emerald-100 via-emerald-100 to-slate-50
     }
     .gradientcard{
-      @apply dark:from-black dark:to-slate-900 bg-gradient-to-tl from-cyan-200 to-slate-50
+      @apply dark:from-black dark:via-gray-950 dark:to-emerald-950 bg-gradient-to-tl from-emerald-200 to-emerald-50
     }
   }

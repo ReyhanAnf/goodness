@@ -9,7 +9,43 @@ import AudioBar from "./audiobar";
 import { useEffect, useState } from "react";
 
 
-export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
+
+// function playlist_ayahs(listsrc: any[]) {
+//   listsrc.map((src: any, index: any) => {
+//     let siv = setInterval(() => {
+//       console.log(src)
+//       if (index + 1 == listsrc.length) {
+//         clearInterval(siv)
+//       }
+//     }, index * 1000)
+//   })
+
+// useEffect(() => {
+//   setAudio(new Audio(link));
+//   playing ? audio.play() : audio.pause();
+// },
+//   [playing, link]
+// );
+
+// useEffect(() => {
+//   audio.addEventListener('ended', () => setPlaying(false));
+//   return () => {
+//     audio.removeEventListener('ended', () => setPlaying(false));
+//   };
+// }, [playing]);
+// }
+
+
+
+
+
+
+
+
+
+
+
+export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize, playsaudio, setPlayaudio }: any) {
   const Tajweed = require("tajweed").Tajweed;
 
   let ayahs_s = surah["data"][0]["ayahs"];
@@ -51,21 +87,25 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
   let [data_audio, setdataAudio] = useState(choice_audio(audio_surah.data, qori))
   useEffect(() => {
     setdataAudio(choice_audio(audio_surah.data, qori))
-
   }, [qori])
+
+
+  // useEffect(() => {
+  //   playlist_ayahs(data_audio.ayahs)
+  // }, [tajweed])
 
 
   return (
     <div className="scroll-smooth">
       <Card className="bg-transparent border-none shadow-none">
-        <CardTitle className={cn("text-sky-950 text-4xl py-5 px-6 text-center dark:text-sky-100", font_kitab.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
+        <CardTitle className={cn("text-emerald-950 text-4xl py-5 px-6 text-center dark:text-emerald-100", font_kitab.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
       </Card>
       {ayahsparse.map((ayah: any, index: any) => (
         <Card key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
             <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-cyan-200/35 bg-opacity-20 ", font_kitab.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
-              <AudioBar link={data_audio.ayahs[index].audio} identiti={data_audio.edition.identifier} />
+              <AudioBar link={data_audio.ayahs[index].audio} playsaudio={playsaudio} setPlayaudio={setPlayaudio} />
               <Copy size={15} />
               <Share size={15} />
             </div>
