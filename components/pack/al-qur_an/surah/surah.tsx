@@ -19,7 +19,7 @@ export default async function ListSurah() {
   return (
     <div className="mb-10">
       {list_surah.map((item: any) => (
-        <Link href={"/al-qur_an/surah?number=" + item.number} className="m-1">
+        <Link key={item.number} href={"/al-qur_an/surah?number=" + item.number} className="m-1">
           <Card className="max-h-[75px] flex flex-row items-center p-1 bg-slate-300 bg-opacity-5 backdrop-blur-md  shadow-md">
             <CardHeader className="flex-none w-0 text-center items-center px-8 -mr-4  ">
               <CardTitle>{item.number}</CardTitle>
