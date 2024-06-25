@@ -8,7 +8,7 @@ export async function get_meta_surah(){
 }
 
 export async function get_surah(number_surah : any) {
-    const req = await fetch(`https://api.alquran.cloud/v1/surah/${number_surah}/editions/quran-simple,quran-tajweed,en.transliteration,id.indonesian,id.jalalayn`, {cache : "force-cache"});
+    const req = await fetch(`https://api.alquran.cloud/v1/surah/${number_surah}/editions/quran-uthmani,quran-tajweed,en.transliteration,id.indonesian,id.jalalayn`, {cache : "force-cache"});
     const res = req.json()
 
     return res;

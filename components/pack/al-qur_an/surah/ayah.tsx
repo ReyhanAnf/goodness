@@ -63,7 +63,6 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
 
     if (toplay != 0) {
       let element = document.getElementById(`ayah-${toplay - 1}`);
-      console.log(element);
       element?.scrollIntoView({ behavior: "smooth" });
       let audio = new Audio(data_audio.ayahs[toplay - 1].audio)
       audio.play();
@@ -96,9 +95,13 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
 
   return (
     <div className="scroll-smooth mb-12">
-      <Card className="bg-transparent border-none shadow-none">
-        <CardTitle className={cn("text-emerald-950 text-4xl py-5 px-6 text-center dark:text-emerald-100", alquranali.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
-      </Card>
+      {surah.data[0].number == 1 || surah.data[0].number == 9 ? (
+        ""
+      ) : (
+        <Card className="bg-transparent border-none shadow-none">
+          <CardTitle className={cn("text-emerald-950 text-4xl py-5 px-6 text-center dark:text-emerald-100", alquranali.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
+        </Card>
+      )}
       {ayahsparse.map((ayah: any, index: any) => (
         <Card id={"ayah-" + (index + 1)} key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
@@ -111,11 +114,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
           </CardHeader>
           <CardContent >
             <div className={alquranali.className}>
-              {tajweed ? (
-                <div className={"text-" + list_fontsize[fontsize] + " tracking-wide leading-[2.5] my-1 text-right p-1"} dangerouslySetInnerHTML={{ __html: ayah }}></div>
-              ) : (
-                <div className={"text-" + list_fontsize[fontsize] + " tracking-wide leading-[2.5] my-1 text-right p-1"}> {ayah}</div>
-              )}
+              <div className={"text-" + list_fontsize[fontsize] + " tracking-wide leading-[2.5] my-1 text-right p-1"} dangerouslySetInnerHTML={{ __html: ayah }}></div>
               <div className=" text-yellow-600/75"><i>{latin[index].text}</i></div>
             </div>
             <Accordion type="single" collapsible>
