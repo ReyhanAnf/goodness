@@ -9,7 +9,7 @@ import localFont from '@next/font/local'
 export const alquranali = localFont({
   src: [
     {
-      path: '../../../../public/fonts/AlQuranAli.ttf',
+      path: '../../../../public/fonts/uthmani.otf',
       weight: '400'
     }
   ],
