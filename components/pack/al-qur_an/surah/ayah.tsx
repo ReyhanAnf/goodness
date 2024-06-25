@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { alquranali, font_kitab } from "./surah";
+import { alquranali, font_kitab, arabnum } from "./surah";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionItem, AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
 import { Copy, Share } from "lucide-react";
@@ -102,7 +102,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
       {ayahsparse.map((ayah: any, index: any) => (
         <Card id={"ayah-" + (index + 1)} key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
-            <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", alquranali.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
+            <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", arabnum.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
               <AudioBar id={ayahs_s[index].numberInSurah} toplay={toplay} setToplay={setToplay} playing={playing} setPlaying={setPlaying} />
               <Copy size={15} />
