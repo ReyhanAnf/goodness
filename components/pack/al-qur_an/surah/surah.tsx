@@ -16,6 +16,16 @@ export const alquranali = localFont({
   variable: '--font-alquranali'
 })
 
+export const arabnum = localFont({
+  src: [
+    {
+      path: '../../../../public/fonts/AlQuranAli.ttf',
+      weight: '400'
+    }
+  ],
+  variable: '--font-arabnum'
+})
+
 import { Amiri } from "next/font/google"
 
 export const font_kitab = Amiri({
@@ -33,7 +43,7 @@ export default async function ListSurah() {
       {list_surah.map((item: any) => (
         <Link key={item.number} href={"/al-qur_an/surah?number=" + item.number} className="m-1">
           <Card className="max-h-[75px] flex flex-row items-center p-1 bg-slate-300 bg-opacity-5 backdrop-blur-md  shadow-md">
-            <CardHeader className="flex-none w-0 text-center items-center px-8 -mr-4  ">
+            <CardHeader className={cn("flex-none w-0 text-center items-center px-8 -mr-4  ", arabnum.className)}>
               <CardTitle>{item.number}</CardTitle>
               <div className="text-xs">{item.revelationType}</div>
             </CardHeader>
