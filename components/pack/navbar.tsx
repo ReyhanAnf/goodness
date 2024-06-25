@@ -24,7 +24,7 @@ import { SquareChevronLeft } from "lucide-react"
 export default function Navbar() {
   let rout = useRouter();
   return (
-    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-cyan-200 dark:from-slate-950 dark:to-cyan-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
+    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-emerald-200 dark:from-slate-950 dark:to-emerald-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
       <MenubarMenu>
         <MenubarTrigger>Home</MenubarTrigger>
         <MenubarContent>

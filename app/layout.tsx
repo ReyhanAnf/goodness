@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import Navbar from "@/components/pack/navbar";
 
+
+
 const poppins = Poppins({
   weight: "400",
   variable: "--font-sans",

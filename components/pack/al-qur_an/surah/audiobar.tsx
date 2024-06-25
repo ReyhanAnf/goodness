@@ -6,32 +6,16 @@ import { useEffect, useState } from "react"
 
 
 
-export default function AudioBar({ link, playsaudio, setPlayaudio }: any) {
-
-  const [audio, setAudio] = useState(new Audio(link));
-  const [playing, setPlaying] = useState(false);
-
-
-  useEffect(() => {
-    setAudio(new Audio(link));
-    playing ? audio.play() : audio.pause();
-  },
-    [playing, link]
-  );
-
-
-
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, [playing]);
-
+export default function AudioBar({ id, toplay, setToplay, playing, setPlaying }: any) {
 
   return (
     <div className="px-2 py-0 rounded-lg flex flex-row w-auto items-center shadow-sm">
-      <Button variant={"ghost"} onClick={() => { setPlaying(!playing) }}>{playing ? (
+      <Button variant={"ghost"} className="hover:bg-transparent" onClick={() => {
+        setPlaying(!playing);
+        if (toplay != id) (
+          setToplay(id)
+        )
+      }}>{toplay == id && playing == true ? (
         <>
           <Pause size={15} />
           pause

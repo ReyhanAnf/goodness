@@ -4,6 +4,18 @@ import { get_meta_surah } from "@/lib/get_surah"
 import { cn } from "@/lib/utils"
 
 
+import localFont from '@next/font/local'
+
+export const alquranali = localFont({
+  src: [
+    {
+      path: '../../../../public/fonts/AlQuranAli.ttf',
+      weight: '400'
+    }
+  ],
+  variable: '--font-alquranali'
+})
+
 import { Amiri } from "next/font/google"
 
 export const font_kitab = Amiri({
@@ -30,7 +42,7 @@ export default async function ListSurah() {
               <CardDescription>{item.englishNameTranslation}</CardDescription>
             </CardHeader>
             <CardContent className="p-1 m-2 flex-none justify-end items-end">
-              <div className={cn("py-1", font_kitab.className)}>{item.name}</div>
+              <div className={cn("py-1", alquranali.className)}>{item.name}</div>
               <div className="text-right">{item.numberOfAyahs} ayats</div>
             </CardContent>
           </Card>

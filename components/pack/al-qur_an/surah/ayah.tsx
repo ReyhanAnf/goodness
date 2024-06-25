@@ -1,7 +1,7 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { font_kitab } from "./surah";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { alquranali, font_kitab } from "./surah";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionItem, AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
 import { Copy, Share } from "lucide-react";
@@ -9,43 +9,7 @@ import AudioBar from "./audiobar";
 import { useEffect, useState } from "react";
 
 
-
-// function playlist_ayahs(listsrc: any[]) {
-//   listsrc.map((src: any, index: any) => {
-//     let siv = setInterval(() => {
-//       console.log(src)
-//       if (index + 1 == listsrc.length) {
-//         clearInterval(siv)
-//       }
-//     }, index * 1000)
-//   })
-
-// useEffect(() => {
-//   setAudio(new Audio(link));
-//   playing ? audio.play() : audio.pause();
-// },
-//   [playing, link]
-// );
-
-// useEffect(() => {
-//   audio.addEventListener('ended', () => setPlaying(false));
-//   return () => {
-//     audio.removeEventListener('ended', () => setPlaying(false));
-//   };
-// }, [playing]);
-// }
-
-
-
-
-
-
-
-
-
-
-
-export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize, playsaudio, setPlayaudio }: any) {
+export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
   const Tajweed = require("tajweed").Tajweed;
 
   let ayahs_s = surah["data"][0]["ayahs"];
@@ -57,7 +21,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize,
   let list_fontsize = ["lg", "xl", "2xl", "3xl", "4xl"]
 
   let parseTajweed = new Tajweed();
-  let ayahsparse: any = []
+  let ayahsparse: any = [];
   if (tajweed) {
     ayahs_t.map((ayah: any) => {
       let parsestr = parseTajweed.parse(ayah.text, true);
@@ -69,6 +33,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize,
       ayahsparse.push(parsestr)
     })
   }
+
 
   function choice_audio(arr: any, key: any) {
     let result = arr[0];
@@ -84,34 +49,68 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize,
     return result;
   }
 
+
   let [data_audio, setdataAudio] = useState(choice_audio(audio_surah.data, qori))
   useEffect(() => {
     setdataAudio(choice_audio(audio_surah.data, qori))
   }, [qori])
 
 
-  // useEffect(() => {
-  //   playlist_ayahs(data_audio.ayahs)
-  // }, [tajweed])
+  const [toplay, setToplay] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
+  useEffect(() => {
+
+    if (toplay != 0) {
+      let element = document.getElementById(`ayah-${toplay - 1}`);
+      console.log(element);
+      element?.scrollIntoView({ behavior: "smooth" });
+      let audio = new Audio(data_audio.ayahs[toplay - 1].audio)
+      audio.play();
+
+      // after done
+      // next
+      if (toplay >= data_audio.ayahs.length) {
+        audio.addEventListener('ended', () => { setToplay(0); setPlaying(false) });
+        return () => {
+          audio.removeEventListener('ended', () => { setToplay(0); setPlaying(false) });
+        };
+      } else if (toplay <= 0 || data_audio.ayahs.length == 0) {
+        audio.pause();
+        setToplay(0);
+        return;
+      } else {
+        if (playing == false) {
+          setToplay(0);
+          audio.pause();
+          return;
+        } else {
+          audio.addEventListener('ended', () => { setToplay(toplay + 1); });
+          return () => {
+            audio.removeEventListener('ended', () => { setToplay(0) });
+          };
+        }
+      }
+    }
+  }, [toplay, playing])
 
   return (
-    <div className="scroll-smooth">
+    <div className="scroll-smooth mb-12">
       <Card className="bg-transparent border-none shadow-none">
-        <CardTitle className={cn("text-emerald-950 text-4xl py-5 px-6 text-center dark:text-emerald-100", font_kitab.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
+        <CardTitle className={cn("text-emerald-950 text-4xl py-5 px-6 text-center dark:text-emerald-100", alquranali.className)}>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</CardTitle>
       </Card>
       {ayahsparse.map((ayah: any, index: any) => (
-        <Card key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
+        <Card id={"ayah-" + (index + 1)} key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
-            <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-cyan-200/35 bg-opacity-20 ", font_kitab.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
+            <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", alquranali.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
-              <AudioBar link={data_audio.ayahs[index].audio} playsaudio={playsaudio} setPlayaudio={setPlayaudio} />
+              <AudioBar id={ayahs_s[index].numberInSurah} toplay={toplay} setToplay={setToplay} playing={playing} setPlaying={setPlaying} />
               <Copy size={15} />
               <Share size={15} />
             </div>
           </CardHeader>
           <CardContent >
-            <div className={font_kitab.className}>
+            <div className={alquranali.className}>
               {tajweed ? (
                 <div className={"text-" + list_fontsize[fontsize] + " tracking-wide leading-[2.5] my-1 text-right p-1"} dangerouslySetInnerHTML={{ __html: ayah }}></div>
               ) : (
@@ -136,6 +135,8 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize,
           </CardContent>
         </Card>
       ))}
+
+
     </div>
   )
 }
