@@ -103,7 +103,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
         </Card>
       )}
       {ayahsparse.map((ayah: any, index: any) => (
-        <Card id={"ayah-" + (index + 1)} key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
+        <Card key={"a" + index} className=" border-0 ring-0 bg-slate-100/0 dark:bg-slate-900/0 first-line: bg-opacity-10 backdrop-blur-sm p-0">
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
             <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", arabnum.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
@@ -117,9 +117,9 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
               <div className={"text-" + list_fontsize[fontsize] + " tracking-wide leading-[2.5] my-1 text-right p-1"} dangerouslySetInnerHTML={{ __html: ayah }}></div>
               <div className=" text-yellow-600/75"><i>{latin[index].text}</i></div>
             </div>
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible >
               <AccordionItem value="item-1">
-                <AccordionTrigger className="text-left">{terjemahan[index].text}</AccordionTrigger>
+                <AccordionTrigger className="text-left" id={"ayah-" + (index + 1)}>{terjemahan[index].text}</AccordionTrigger>
                 <AccordionContent className="border-l-2 border-sky-300 px-4 py-2 my-1">
                   <h2 className="font-semibold my-1">Tafsir</h2>
                   <div className="text-sm">
