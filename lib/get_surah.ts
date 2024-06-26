@@ -1,7 +1,7 @@
 
 
 export async function get_meta_surah(){
-  const req = await fetch("https://api.alquran.cloud/v1/surah", {cache : "force-cache"});
+  const req = await fetch("https://quran-api.santrikoding.com/api/surah", {cache : "force-cache"});
   const res = req.json();
 
   return res;
@@ -119,9 +119,10 @@ export async function get_audio_surah(number_surah : any) {
       url += ","
     }
   })
+  console.log(url)
 
   const req = await fetch(url, {cache : "force-cache"});
-    const res = req.json()
+  const res = req.json()
 
     return res;
 }

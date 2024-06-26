@@ -5,6 +5,9 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import ListSurah from "./surah/surah"
+import { Suspense } from 'react'
+import ListSkeleton  from "@/components/pack/listskeleton";
+
 
 export function Sorter() {
   return (
@@ -21,7 +24,9 @@ export function Sorter() {
       </TabsContent>
       <TabsContent value="surat">
         <div className="h-svh overflow-y-scroll">
-          <ListSurah />
+          <Suspense fallback={<ListSkeleton />}>
+              <ListSurah />
+          </Suspense>
         </div>
       </TabsContent>
       <TabsContent value="urutan">

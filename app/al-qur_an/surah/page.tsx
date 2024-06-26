@@ -1,15 +1,15 @@
-import ReadOneSurah from "@/components/pack/al-qur_an/surah/read_onesurah";
-import { get_surah, get_audio_surah } from "@/lib/get_surah";
 
-export default async function Page({ searchParams, }: { searchParams?: { [key: string]: string | string[] | undefined }; }) {
-  let numbersurah = searchParams ? (searchParams.number == "0" ? 1 : searchParams.number) : 1;
+import RecentRead from "@/components/pack/al-qur_an/recentread"
+import { Sorter } from "@/components/pack/al-qur_an/sorter";
 
-  let surah = await get_surah(numbersurah);
-  let audio_surah = await get_audio_surah(numbersurah);
+
+export default function Page() {
 
   return (
-    <main className="w-full gradientbg">
-      <ReadOneSurah surah={surah} audio_surah={audio_surah} />
+    <main className="flex flex-col max-h-screen h-screen bg-scroll w-full gradientbg">
+      <h1 className="text-xl text-center font-bold py-2">Al-Qur'an Nul Karim</h1>
+        <RecentRead />
+        <Sorter />
     </main>
-  )
+  );
 }
