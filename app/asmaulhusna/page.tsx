@@ -1,8 +1,14 @@
+import SusPageHusna from '@/components/pack/asmaulhusna/suspagehusna';
+import { Suspense } from 'react';
+import ListSkeleton from '@/components/pack/listskeleton';
 
 export default function Page() {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Asmaúl Husna
-    </main>
+    <div>
+      <Suspense fallback={<ListSkeleton />}>
+        <SusPageHusna />
+      </Suspense>
+    </div>
   );
 }

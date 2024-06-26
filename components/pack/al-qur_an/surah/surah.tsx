@@ -4,7 +4,7 @@ import { get_meta_surah } from "@/lib/get_surah"
 import { cn } from "@/lib/utils";
 
 
-import localFont from '@next/font/local'
+import localFont from "next/font/local"
 
 export const alquranali = localFont({
   src: [

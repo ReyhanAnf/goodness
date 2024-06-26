@@ -1,24 +1,32 @@
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { BadgeInfo } from "lucide-react"
+import { BadgeInfo, Play, Pause } from "lucide-react"
+import { useEffect, useState } from "react";
 
 
 
 export default function DetailSurah({ ms }: any) {
+  let [playing, setPlaying] = useState(false);
+  let audio = new Audio(ms.audio);
 
+  if (!playing) {
+    audio.pause()
+  } else {
+    audio.play()
+  }
   return (
     <Dialog>
       <DialogTrigger>
         <BadgeInfo size={20} />
       </DialogTrigger>
-      <DialogContent className="rounded-lg bg-slate-200 border-emerald-500">
+      <DialogContent className="rounded-lg bg-slate-200 dark:bg-gray-900 border-emerald-500" aria-describedby="p">
         <DialogHeader>
           <DialogTitle>{ms.nama}</DialogTitle>
           <DialogTitle>{ms.nomor} . {ms.nama_latin}</DialogTitle>
@@ -32,6 +40,17 @@ export default function DetailSurah({ ms }: any) {
             <div className="text-left" dangerouslySetInnerHTML={{ __html: ms.deskripsi }}></div>
           </div>
         </DialogHeader>
+        <Button variant={"outline"} onClick={() => { audio.pause(); setPlaying(!playing); }} className="border-emerald-800">{playing ? (
+          <div className="flex flex-row justify-center items-center gap-2">
+            <Pause size={25} />
+            <p>Berhenti</p>
+          </div>
+        ) : (
+          <div className="flex flex-row justify-center items-center gap-2">
+            <Play size={25} />
+            <p>putar surat ini secara full tanpa per ayat</p>
+          </div>
+        )}</Button>
       </DialogContent>
     </Dialog>
 
