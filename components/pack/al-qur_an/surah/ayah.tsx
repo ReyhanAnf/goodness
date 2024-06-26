@@ -58,15 +58,13 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
 
   const [toplay, setToplay] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [gaudio, setGaudio] = useState(new Audio());
 
   useEffect(() => {
 
     if (toplay != 0) {
       let element = document.getElementById(`ayah-${toplay - 1}`);
       element?.scrollIntoView({ behavior: "smooth" });
-      let audio = new Audio(data_audio.ayahs[toplay - 1].audio)
-      setGaudio(audio);
+      let audio = new Audio(data_audio.ayahs[toplay - 1].audio);
       audio.play();
 
       // after done
@@ -109,7 +107,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
           <CardHeader className="w-full h-0 text-sm my-2 flex-row justify-between items-center">
             <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", arabnum.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
-              <AudioBar id={ayahs_s[index].numberInSurah} toplay={toplay} setToplay={setToplay} playing={playing} setPlaying={setPlaying} audio={gaudio} />
+              <AudioBar id={ayahs_s[index].numberInSurah} toplay={toplay} setToplay={setToplay} playing={playing} setPlaying={setPlaying} />
               <Copy size={15} />
               <Share size={15} />
             </div>

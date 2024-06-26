@@ -14,13 +14,22 @@ import { useEffect, useState } from "react";
 
 export default function DetailSurah({ ms }: any) {
   let [playing, setPlaying] = useState(false);
-  let audio = new Audio(ms.audio);
 
-  if (!playing) {
-    audio.pause()
-  } else {
-    audio.play()
-  }
+  useEffect(() => {
+    let audio = new Audio(ms.audio);
+
+    if (playing) {
+      audio.play()
+    } else {
+      audio.pause()
+    }
+
+    audio.addEventListener('ended', () => { audio.pause(); setPlaying(false) });
+    return () => {
+      audio.removeEventListener('ended', () => { audio.pause(); setPlaying(false) });
+    };
+  }, [playing])
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -40,7 +49,7 @@ export default function DetailSurah({ ms }: any) {
             <div className="text-left" dangerouslySetInnerHTML={{ __html: ms.deskripsi }}></div>
           </div>
         </DialogHeader>
-        <Button variant={"outline"} onClick={() => { audio.pause(); setPlaying(!playing); }} className="border-emerald-800">{playing ? (
+        <Button variant={"outline"} onClick={() => { setPlaying(!playing); }} className="border-emerald-800">{playing ? (
           <div className="flex flex-row justify-center items-center gap-2">
             <Pause size={25} />
             <p>Berhenti</p>
