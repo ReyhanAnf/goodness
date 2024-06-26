@@ -5,7 +5,7 @@ import "../tajwid.css";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import AyahsCard from "./ayah";
 import MetaSurah from "./metasurah";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
@@ -16,10 +16,14 @@ export default function ReadOneSurah({ surah, audio_surah, metasurah, idsurah }:
 
 
   const [playaudio_ayahs, setPlayaudio_ayahs] = useState([]);
+
+  useEffect(() => {
+    window.localStorage.setItem(`surah_${idsurah}`, JSON.stringify(surah))
+  }, [surah])
   return (
     <Card className="bg-slate-100 bg-opacity-5 backdrop-blur-sm p-0">
       <CardHeader className="gradientcard text-center flex-col justify-between gap-1 sticky pb-0 px-0 z-50 top-0 w-full">
-        <MetaSurah metasurah={metasurah} setpTajweed={setTajweed} setpQori={setQori} pqori={qori} setpFontsize={setFontsize} idsurah={idsurah}/>
+        <MetaSurah metasurah={metasurah} setpTajweed={setTajweed} setpQori={setQori} pqori={qori} setpFontsize={setFontsize} idsurah={idsurah} />
       </CardHeader>
 
       <CardContent className="ayahread gradientcard pb-10 p-2 scroll-smooth">
@@ -29,3 +33,4 @@ export default function ReadOneSurah({ surah, audio_surah, metasurah, idsurah }:
   )
 
 }
+

@@ -17,8 +17,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Undertable",
-  description: "Share your homework",
+  title: "Goodness",
+  description: "Subhanallah",
 };
 
 export default async function RootLayout({

@@ -19,7 +19,7 @@ import { ModeToggle } from "./themebutton"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { SquareChevronLeft } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 
 export default function Navbar() {
   let rout = useRouter();
@@ -81,7 +81,7 @@ export default function Navbar() {
       </MenubarMenu>
       <MenubarMenu>
         <Button variant={"ghost"} onClick={() => { rout.back() }}>
-          <SquareChevronLeft />
+          <ChevronLeft />
         </Button>
       </MenubarMenu>
     </Menubar>
