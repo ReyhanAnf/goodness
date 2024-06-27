@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import TimeClock from "@/components/pack/main/timeclock";
 
-export default async function Page() {
+export default function Page() {
   return (
     <main className="flex flex-col h-screen w-full dark:from-black dark:to-slate-950 bg-gradient-to-b from-slate-50 from-60 to-cyan-50 to-40">
       <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3">
@@ -19,7 +20,8 @@ export default async function Page() {
             <div className="dash-text-blur w-[90%] text-white ">
               <i>Kata Kata takan pernah bisa mengungkapkannya rasa ini juga bla bla blaa</i>
             </div>
-            <div className="dash-text-blur w-auto text-lg py-2 font-semibold">06 : 35 : 43</div>
+            <TimeClock />
+            
             <div className="dash-text-blur w-full shadow-md text-xs flex flex-row items-center justify-between overflow-x-scroll">
               <div>
                 <div>Imsak</div>
