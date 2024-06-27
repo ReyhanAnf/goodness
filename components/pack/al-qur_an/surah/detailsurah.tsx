@@ -17,28 +17,16 @@ export default function DetailSurah({ ms }: any) {
   let [playing, setPlaying] = useState(false);
   const { load, play, pause } = useGlobalAudioPlayer()
 
-
-
   useEffect(() => {
     load(ms.audio, {
       autoplay: false
     })
 
-
-
-
     if (playing) {
-      // audio.play()
       play();
     } else {
-      // audio.pause()
       pause()
     }
-
-    // audio.addEventListener('ended', () => { audio.pause(); setPlaying(false) });
-    // return () => {
-    //   audio.removeEventListener('ended', () => { audio.pause(); setPlaying(false) });
-    // };
   }, [playing])
 
   return (

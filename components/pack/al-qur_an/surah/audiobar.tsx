@@ -3,10 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, Pause } from "lucide-react";
 
-
-
 export default function AudioBar({ id, toplay, setToplay, playing, setPlaying }: any) {
-
   return (
     <div className="px-2 py-0 rounded-lg flex flex-row w-auto items-center">
       <Button variant={"ghost"} className="hover:bg-transparent" onClick={() => {
@@ -14,7 +11,6 @@ export default function AudioBar({ id, toplay, setToplay, playing, setPlaying }:
         if (toplay != id) (
           setToplay(id)
         )
-
       }}>{toplay == id && playing == true ? (
         <>
           <Pause size={15} />

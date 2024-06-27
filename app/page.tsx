@@ -1,8 +1,3 @@
-// import { Amiri } from "next/font/google";
-// const amiri = Amiri({
-//   subsets: ["arabic"],
-//   weight: ["400"]
-// })
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";

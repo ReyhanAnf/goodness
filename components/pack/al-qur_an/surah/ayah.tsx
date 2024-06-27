@@ -8,6 +8,7 @@ import { Copy, Share } from "lucide-react";
 import AudioBar from "./audiobar";
 import { useEffect, useState } from "react";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
+import { Cabin } from "next/font/google";
 
 
 export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
@@ -67,18 +68,6 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
       let element = document.getElementById(`ayah-${toplay - 1}`);
       element?.scrollIntoView({ behavior: "smooth" });
 
-      // load("https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3", {
-      //   autoplay: true,
-      //   onend: () => {
-      //     nextAyah()
-      //   }
-      // })
-
-      // const nextAyah = () => {
-      // }
-
-      // after done
-      // next
       if (toplay > data_audio.ayahs.length) {
         setToplay(0);
         setPlaying(false);
@@ -89,7 +78,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
         pause();
         return;
       } else {
-        if (toplay == 1 && data_audio.numberOfAyahs == 1) {
+        if (toplay == 1 && data_audio.numberOfAyahs != 1) {
           load("https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3", {
             autoplay: true,
             onend: () => {
@@ -142,7 +131,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
               <div className=" text-yellow-600/75"><i>{latin[index].text}</i></div>
             </div>
             <Accordion type="single" collapsible >
-              <AccordionItem value="item-1">
+              <AccordionItem value="item-1" className="hover:no-underline">
                 <AccordionTrigger className="text-left" id={"ayah-" + (index + 1)}>{terjemahan[index].text}</AccordionTrigger>
                 <AccordionContent className="border-l-2 border-sky-300 px-4 py-2 my-1">
                   <h2 className="font-semibold my-1">Tafsir</h2>

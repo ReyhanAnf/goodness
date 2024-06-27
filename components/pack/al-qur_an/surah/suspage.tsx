@@ -6,8 +6,6 @@ export default async function SusPageSurah({ idsurah }: any) {
   let audio_surah = await get_audio_surah(idsurah);
   let metasurah = await get_meta_surah();
 
-
-
   return (
     <ReadOneSurah surah={surah} audio_surah={audio_surah} metasurah={metasurah} idsurah={idsurah} />
   )

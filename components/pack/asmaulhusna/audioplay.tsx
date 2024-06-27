@@ -3,18 +3,24 @@
 import { Play, Pause } from "lucide-react"
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from "react";
+import { useGlobalAudioPlayer } from "react-use-audio-player";
 
 export default function AudioPlay() {
   const [playing, setPlaying] = useState(false);
 
+  const { load, play, pause } = useGlobalAudioPlayer()
   useEffect(() => {
-    const audio = new Audio("/asmaulhusna_sound.mp3");
+    load("/asmaulhusna_sound.mp3", {
+      autoplay: false
+    })
+
 
     if (playing) {
-      audio.play()
+      play();
     } else {
-      audio.pause()
+      pause()
     }
+
   }, [playing])
 
   return (

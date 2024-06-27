@@ -1,8 +1,6 @@
-"use client"
-
-// import { get_surah } from "@/lib/get_surah"
+"use client";
 import "../tajwid.css";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import AyahsCard from "./ayah";
 import MetaSurah from "./metasurah";
 import { useState, useEffect } from "react";
