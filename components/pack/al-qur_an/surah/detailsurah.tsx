@@ -1,3 +1,4 @@
+"use client"
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,25 +10,35 @@ import {
 } from "@/components/ui/dialog";
 import { BadgeInfo, Play, Pause } from "lucide-react"
 import { useEffect, useState } from "react";
-
+import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
 
 export default function DetailSurah({ ms }: any) {
   let [playing, setPlaying] = useState(false);
+  const { load, play, pause } = useGlobalAudioPlayer()
+
+
 
   useEffect(() => {
-    let audio = new Audio(ms.audio);
+    load(ms.audio, {
+      autoplay: false
+    })
+
+
+
 
     if (playing) {
-      audio.play()
+      // audio.play()
+      play();
     } else {
-      audio.pause()
+      // audio.pause()
+      pause()
     }
 
-    audio.addEventListener('ended', () => { audio.pause(); setPlaying(false) });
-    return () => {
-      audio.removeEventListener('ended', () => { audio.pause(); setPlaying(false) });
-    };
+    // audio.addEventListener('ended', () => { audio.pause(); setPlaying(false) });
+    // return () => {
+    //   audio.removeEventListener('ended', () => { audio.pause(); setPlaying(false) });
+    // };
   }, [playing])
 
   return (

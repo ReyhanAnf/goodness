@@ -14,6 +14,7 @@ export default function AudioBar({ id, toplay, setToplay, playing, setPlaying }:
         if (toplay != id) (
           setToplay(id)
         )
+
       }}>{toplay == id && playing == true ? (
         <>
           <Pause size={15} />

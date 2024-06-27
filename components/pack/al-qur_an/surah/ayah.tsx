@@ -7,6 +7,7 @@ import { Accordion, AccordionItem, AccordionContent, AccordionTrigger } from "@/
 import { Copy, Share } from "lucide-react";
 import AudioBar from "./audiobar";
 import { useEffect, useState } from "react";
+import { useGlobalAudioPlayer } from "react-use-audio-player";
 
 
 export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
@@ -58,36 +59,59 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
 
   const [toplay, setToplay] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const { load, play, pause } = useGlobalAudioPlayer();
 
   useEffect(() => {
 
-    if (toplay != 0) {
+    if (toplay != 0 || playing) {
       let element = document.getElementById(`ayah-${toplay - 1}`);
       element?.scrollIntoView({ behavior: "smooth" });
-      let audio = new Audio(data_audio.ayahs[toplay - 1].audio);
-      audio.play();
+
+      // load("https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3", {
+      //   autoplay: true,
+      //   onend: () => {
+      //     nextAyah()
+      //   }
+      // })
+
+      // const nextAyah = () => {
+      // }
 
       // after done
       // next
-      if (toplay >= data_audio.ayahs.length) {
-        audio.addEventListener('ended', () => { setToplay(0); setPlaying(false) });
-        return () => {
-          audio.removeEventListener('ended', () => { setToplay(0); setPlaying(false) });
-        };
-      } else if (toplay <= 0 || data_audio.ayahs.length == 0) {
-        audio.pause();
+      if (toplay > data_audio.ayahs.length) {
         setToplay(0);
+        setPlaying(false);
+        pause();
+      } else if (toplay <= 0 || data_audio.ayahs.length == 0) {
+        setToplay(0);
+        setPlaying(false)
+        pause();
         return;
       } else {
-        if (playing == false) {
-          setToplay(0);
-          audio.pause();
-          return;
+        if (toplay == 1 && data_audio.numberOfAyahs == 1) {
+          load("https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3", {
+            autoplay: true,
+            onend: () => {
+              load(data_audio.ayahs[toplay - 1].audio, {
+                autoplay: true,
+                onend: () => {
+                  setToplay(toplay + 1);
+                }
+              });
+            }
+          });
         } else {
-          audio.addEventListener('ended', () => { setToplay(toplay + 1); });
-          return () => {
-            audio.removeEventListener('ended', () => { setToplay(0) });
-          };
+          load(data_audio.ayahs[toplay - 1].audio, {
+            autoplay: true,
+            onend: () => {
+              setToplay(toplay + 1);
+            }
+          });
+        }
+
+        if (!playing) {
+          pause()
         }
       }
     }
