@@ -33,7 +33,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn(
         "min-h-screen bg-slate-200/90 dark:bg-black dark:from-black dark:to-slate-900 font-sans antialiased w-full basefont",
-        ubuntu.variable
+        ubuntu.className
       )}>
         <Providers>
           {children}

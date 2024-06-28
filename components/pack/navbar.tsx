@@ -16,36 +16,16 @@ import { ModeToggle } from "./themebutton"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LayoutGrid } from "lucide-react"
 
 export default function Navbar() {
   let rout = useRouter();
   return (
     <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-emerald-200 dark:from-slate-950 dark:to-emerald-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
       <MenubarMenu>
-        <MenubarTrigger>Home</MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>
-            <Link href={"/"}>Homepage</Link>
-          </MenubarItem>
-          <MenubarItem>
-            New Window <MenubarShortcut>⌘N</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem disabled>New Incognito Window</MenubarItem>
-          <MenubarSeparator />
-          <MenubarSub>
-            <MenubarSubTrigger>Share</MenubarSubTrigger>
-            <MenubarSubContent>
-              <MenubarItem>Email link</MenubarItem>
-              <MenubarItem>Messages</MenubarItem>
-              <MenubarItem>Notes</MenubarItem>
-            </MenubarSubContent>
-          </MenubarSub>
-          <MenubarSeparator />
-          <MenubarItem>
-            Print... <MenubarShortcut>⌘P</MenubarShortcut>
-          </MenubarItem>
-        </MenubarContent>
+        <MenubarTrigger>
+          <Link href={"/"}><LayoutGrid size={25} /></Link>
+        </MenubarTrigger>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Edit</MenubarTrigger>
