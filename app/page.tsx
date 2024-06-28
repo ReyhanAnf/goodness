@@ -10,12 +10,17 @@ import arabic from "react-date-object/calendars/arabic";
 export default function Page() {
   let masehi = new DateObject()
   
-  let tahun_m = masehi.year;
-  let bulan_m = masehi.month.number;
-  let tanggal_m = masehi.day;
-  let hari_m = masehi.weekDay.index;
+  let objtanggal_m = {
+    tahun : masehi.year,
+    bulan : masehi.month.number,
+    hari : masehi.weekDay.index,
+    tanggal : masehi.day
+  }
   
-  switch(hari_m) {
+  let hari_m = "Minggu";
+  let bulan_m = "Januari";
+  
+  switch(objtanggal_m.hari) {
    case 0: hari_m = "Minggu"; break;
    case 1: hari_m = "Senin"; break;
    case 2: hari_m = "Selasa"; break;
@@ -24,7 +29,7 @@ export default function Page() {
    case 5: hari_m = "Jum'at"; break;
    case 6: hari_m = "Sabtu"; break;
   }
-  switch(bulan_m) {
+  switch(objtanggal_m.bulan) {
    case 0: bulan_m = "Januari"; break;
    case 1: bulan_m = "Februari"; break;
    case 2: bulan_m = "Maret"; break;
@@ -38,17 +43,22 @@ export default function Page() {
    case 10: bulan_m = "November"; break;
    case 11: bulan_m = "Desember"; break;
   }
-  let tampiltanggal_m = hari_m + ", " + tanggal_m + " " + bulan_m + " " + tahun_m;
+  let tampiltanggal_m = objtanggal_m.hari + ", " + objtanggal_m.tanggal + " " + objtanggal_m.bulan + " " + objtanggal_m.tahun;
 
   let date = new DateObject();
   let hijri = date.convert(arabic);
   
-  let tahun_h = hijri.year;
-  let bulan_h = hijri.month.number;
-  let tanggal_h = hijri.day;
-  let hari_h = hijri.weekDay.index;
+  let objtanggal_h = {
+    tahun : hijri.year,
+    bulan : hijri.month.number,
+    hari : hijri.weekDay.index,
+    tanggal : hijri.day
+  }
   
-  switch(hari_h - 1) {
+  let hari_h = "Minggu";
+  let bulan_h = "Muharram";
+  
+  switch(objtanggal_h.hari - 1) {
    case 0: hari_h = "Ahad"; break;
    case 1: hari_h = "Senin"; break;
    case 2: hari_h = "Tsalasa"; break;
@@ -57,7 +67,7 @@ export default function Page() {
    case 5: hari_h = "Jum'at"; break;
    case 6: hari_h = "Sab'at"; break;
   }
-  switch(bulan_h - 1) {
+  switch(objtanggal_h.bulan - 1) {
    case 0: bulan_h = "Muharram"; break;
    case 1: bulan_h = "Safar"; break;
    case 2: bulan_h = "Rabiul Awal"; break;
@@ -71,7 +81,7 @@ export default function Page() {
    case 10: bulan_h = "Dzulqadah"; break;
    case 11: bulan_h = "Dzuhhijjah"; break;
   }
-  let tampiltanggal_h = hari_h + ", " + tanggal_h + " " + bulan_h + " " + tahun_h;
+  let tampiltanggal_h = objtanggal_h.hari + ", " + objtanggal_h.tanggal + " " + objtanggal_h.bulan + " " + objtanggal_h.tahun;
 
 
   return (
