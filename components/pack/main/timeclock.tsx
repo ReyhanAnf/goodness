@@ -12,8 +12,7 @@ export default function TimeClock(){
     <>
     {isClient ? (
     <div className="dash-text-blur w-auto text-lg py-2 font-extrabold flex flex-col gap-2 justify-center items-center">
-      <Clock format={'dddd, MMMM Mo, YYYY'} ticking={true} timezone={'ID/Jakarta'} noSSR={false} suppressHydrationWarning />
-      <Clock className="font-bold text-xl" format={'HH:mm:ss'} ticking={true} timezone={'ID/Jakarta'}suppressHydrationWarning noSSR={false} />
+     <Clock className="font-bold text-xl" format={'HH:mm:ss'} ticking={true} timezone={'ID/Jakarta'} suppressHydrationWarning noSSR={false} />
     </div>
       ) : (
     <div className="dash-text-blur w-auto text-lg py-2 font-semibold">

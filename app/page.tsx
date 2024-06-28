@@ -2,8 +2,78 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import TimeClock from "@/components/pack/main/timeclock";
+import DateObject from "react-date-object";
+import arabic from "react-date-object/calendars/arabic";
+
+
 
 export default function Page() {
+  let masehi = new DateObject()
+  
+  let tahun_m = masehi.year;
+  let bulan_m = masehi.month.number;
+  let tanggal_m = masehi.day;
+  let hari_m = masehi.weekDay.index;
+  
+  switch(hari_m) {
+   case 0: hari_m = "Minggu"; break;
+   case 1: hari_m = "Senin"; break;
+   case 2: hari_m = "Selasa"; break;
+   case 3: hari_m = "Rabu"; break;
+   case 4: hari_m = "Kamis"; break;
+   case 5: hari_m = "Jum'at"; break;
+   case 6: hari_m = "Sabtu"; break;
+  }
+  switch(bulan_m) {
+   case 0: bulan_m = "Januari"; break;
+   case 1: bulan_m = "Februari"; break;
+   case 2: bulan_m = "Maret"; break;
+   case 3: bulan_m = "April"; break;
+   case 4: bulan_m = "Mei"; break;
+   case 5: bulan_m = "Juni"; break;
+   case 6: bulan_m = "Juli"; break;
+   case 7: bulan_m = "Agustus"; break;
+   case 8: bulan_m = "September"; break;
+   case 9: bulan_m = "Oktober"; break;
+   case 10: bulan_m = "November"; break;
+   case 11: bulan_m = "Desember"; break;
+  }
+  let tampiltanggal_m = hari_m + ", " + tanggal_m + " " + bulan_m + " " + tahun_m;
+
+  let date = new DateObject();
+  let hijri = date.convert(arabic);
+  
+  let tahun_h = hijri.year;
+  let bulan_h = hijri.month.number;
+  let tanggal_h = hijri.day;
+  let hari_h = hijri.weekDay.index;
+  
+  switch(hari_h - 1) {
+   case 0: hari_h = "Ahad"; break;
+   case 1: hari_h = "Senin"; break;
+   case 2: hari_h = "Tsalasa"; break;
+   case 3: hari_h = "Rabu'"; break;
+   case 4: hari_h = "Khamis"; break;
+   case 5: hari_h = "Jum'at"; break;
+   case 6: hari_h = "Sab'at"; break;
+  }
+  switch(bulan_h - 1) {
+   case 0: bulan_h = "Muharram"; break;
+   case 1: bulan_h = "Safar"; break;
+   case 2: bulan_h = "Rabiul Awal"; break;
+   case 3: bulan_h = "Rabiul Akhir"; break;
+   case 4: bulan_h = "Jumadil Awal"; break;
+   case 5: bulan_h = "Jumadil Akhir"; break;
+   case 6: bulan_h = "Rajab"; break;
+   case 7: bulan_h = "Sya'ban"; break;
+   case 8: bulan_h = "Ramadhan"; break;
+   case 9: bulan_h = "Syawal"; break;
+   case 10: bulan_h = "Dzulqadah"; break;
+   case 11: bulan_h = "Dzuhhijjah"; break;
+  }
+  let tampiltanggal_h = hari_h + ", " + tanggal_h + " " + bulan_h + " " + tahun_h;
+
+
   return (
     <main className="flex flex-col h-screen w-full dark:from-black dark:to-slate-950 bg-gradient-to-b from-slate-50 from-60 to-cyan-50 to-40">
       <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3">
@@ -13,8 +83,8 @@ export default function Page() {
             <div className="flex flex-row w-full justify-between mb-4 text-sm text-white">
               <div>Cisayong, Tasikmalaya</div>
               <div>
-                <div>20 Juni 2024 M</div>
-                <div>13 Dzulhijjah 1443 H</div>
+                <div>{tampiltanggal_m}</div>
+                <div>{tampiltanggal_h}</div>
               </div>
             </div>
             <div className="dash-text-blur w-[90%] text-white ">
