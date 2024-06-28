@@ -115,7 +115,7 @@ export default function Page() {
               <Separator orientation="vertical" />
               <div className="nextpray">
                 <div>Ashar</div>
-                <div>04.30 </div>
+                <div>15.15 </div>
               </div>
               <Separator orientation="vertical" />
               <div>
