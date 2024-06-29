@@ -12,16 +12,16 @@ export default async function SusMainPage({ raw_loc }: any) {
   return (
     <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3 mb-20">
       <div className="w-full h-full">
-        <Image alt="dashboard" src={"/dashboard.svg"} className="relative left-1/2 -translate-x-1/2 w-1/2 bg-opacity-75" width={100} height={50} priority={true} />
-        <div className="w-full z-50 absolute top-0 flex flex-col items-center p-4">
+        <Image alt="dashboard" src={"/dashboard.svg"} className="absolute left-1/2 z-0 -translate-x-1/2 w-1/2 bg-opacity-75" width={100} height={50} priority={true} />
+        <div className="w-full flex flex-col items-center p-2 bg-transparent">
           <div className="flex flex-row w-full justify-between items-center mb-4 text-sm text-white">
             <div className="flex flex-row gap-2 items-center w-1/3">
               <DisplayLocation latitude={raw_loc.latitude} longitude={raw_loc.longitude} />
               <ClientLocation />
             </div>
-            <CurrentDate className="flex flex-col items-end" />
+            <CurrentDate className="flex flex-col items-end z-30" />
           </div>
-          <div className="dash-text-blur z-10 w-[90%] max-h-44 overflow-scroll">
+          <div className="dash-text-blur z-10 w-[90%] max-h-40 text-xs overflow-scroll">
             <i>Boleh jadi kamu membenci sesuatu, padahal ia amat baik bagimu, dan boleh jadi (pula) kamu menyukai sesuatu, padahal ia amat buruk bagimu. Allah mengetahui, sedang kamu tidak mengetahui. QS Al Baqarah 216</i>
           </div>
           <TimeClock />

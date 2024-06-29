@@ -58,17 +58,17 @@ export default function CurrentDate({ className }: any) {
     tanggal: hijri.day
   }
 
-  let hari_h = "Minggu";
+  let hari_h = "Ahad";
   let bulan_h = "Muharram";
 
-  switch (objtanggal_h.hari - 1) {
-    case 0: hari_h = "Ahad"; break;
-    case 1: hari_h = "Senin"; break;
-    case 2: hari_h = "Tsalasa"; break;
-    case 3: hari_h = "Rabu'"; break;
-    case 4: hari_h = "Khamis"; break;
-    case 5: hari_h = "Jum'at"; break;
-    case 6: hari_h = "Sab'at"; break;
+  switch (objtanggal_h.hari) {
+    case 1: hari_h = "Ahad"; break;
+    case 2: hari_h = "Senin"; break;
+    case 3: hari_h = "Tsalasa"; break;
+    case 4: hari_h = "Rabu'"; break;
+    case 5: hari_h = "Khamis"; break;
+    case 6: hari_h = "Jum'at"; break;
+    case 0: hari_h = "Sab'at"; break;
   }
   switch (objtanggal_h.bulan - 1) {
     case 0: bulan_h = "Muharram"; break;
