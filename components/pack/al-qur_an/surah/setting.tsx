@@ -13,7 +13,7 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { Slider } from "@/components/ui/slider"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { FormEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { qori_audio } from "@/lib/get_surah"
 import { useRouter } from "next/navigation"
 

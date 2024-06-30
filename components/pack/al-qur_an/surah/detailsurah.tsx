@@ -19,13 +19,13 @@ export default function DetailSurah({ ms }: any) {
 
   useEffect(() => {
     load(ms.audio, {
-      autoplay: false
+      autoplay: true
     })
 
     if (playing) {
       play();
     } else {
-      pause()
+      pause();
     }
   }, [playing])
 
@@ -34,7 +34,7 @@ export default function DetailSurah({ ms }: any) {
       <DialogTrigger>
         <BadgeInfo size={20} />
       </DialogTrigger>
-      <DialogContent className="rounded-lg bg-slate-200 dark:bg-gray-900 border-emerald-500" aria-describedby="p">
+      <DialogContent >
         <DialogHeader>
           <DialogTitle>{ms.nama}</DialogTitle>
           <DialogTitle>{ms.nomor} . {ms.nama_latin}</DialogTitle>

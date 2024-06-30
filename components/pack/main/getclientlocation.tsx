@@ -32,7 +32,7 @@ export default function ClientLocation() {
 
   return (
     <div>
-      <Button className='hover:bg-transparent' onClick={() => {
+      <Button className='hover:bg-transparent p-0 m-0' onClick={() => {
         setPos(!getpos);
         let interv = setInterval(() => {
           setPos(false);
@@ -41,9 +41,9 @@ export default function ClientLocation() {
 
       }} variant={"ghost"}>
         {!getpos ? (
-          <MapPin size={15} />
+          <MapPin size={20} />
         ) : (
-          <LoaderCircle size={15} />
+          <LoaderCircle size={20} />
         )}
       </Button>
     </div>

@@ -27,8 +27,9 @@ export default function Page() {
           </Link>
           <div className="menu-dash-item gradientcard ">
             <Link href={"/hadits"} className="menu-dash-item gradientcard bg-opacity-20 flex flex-col items-center">
+              <span className="w-full gradientline text-xs p-1">Fitur Belum Lengkap</span>
               <Image src={"/hadits.svg"} width={80} height={80} alt="al-hadits" className="" />
-              Hadits
+              <span>Hadits</span>
             </Link>
           </div>
           <div className="menu-dash-item gradientcard ">

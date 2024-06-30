@@ -1,5 +1,7 @@
 import ListPerawi from "@/components/pack/hadits/listperawi";
 import SearchHadits from "@/components/pack/hadits/searchhadits";
+import ListSkeleton from "@/components/pack/listskeleton";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
@@ -9,7 +11,9 @@ export default function Page() {
         <div>Temukan Assunnah dan hadits sahih</div>
       </div>
       <SearchHadits />
-      <ListPerawi />
+      <Suspense fallback={<ListSkeleton />} >
+        <ListPerawi />
+      </Suspense>
     </main>
   );
 }

@@ -37,7 +37,7 @@ export default function TimeOfPray({ nowDate, timings }: any) {
 
 
   return (
-    <Carousel className="w-full bg-transparent px-2 m-0"
+    <Carousel className="w-full bg-transparent px-3 m-0"
       plugins={[
         Autoplay({
           delay: 5000,
@@ -46,7 +46,7 @@ export default function TimeOfPray({ nowDate, timings }: any) {
     >
       <CarouselContent>
         <CarouselItem className="px-3">
-          <div className="dash-text-blur w-full shadow-md text-xs mx-1 flex flex-row items-center justify-between overflow-x-scroll">
+          <div className="dash-text-blur ring-1 ring-emerald-900 w-full shadow-md text-xs mx-1 flex flex-row items-center justify-between overflow-x-scroll">
             <div id="p-Imsak">
               <div>Imsak</div>
               <div>{now_pray_time.Imsak.split(" ")[0]}</div>
@@ -84,7 +84,7 @@ export default function TimeOfPray({ nowDate, timings }: any) {
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="dash-text-blur mx-1 w-full shadow-md text-xs flex flex-row items-center justify-between overflow-x-scroll">
+          <div className="dash-text-blur  ring-1 ring-emerald-900 mx-1 w-full shadow-md text-xs flex flex-row items-center justify-between overflow-x-scroll">
             <div className="flex flex-col items-center justify-center">
               <div id="p-Firstthird">1/3 Night</div>
               <div>{now_pray_time.Firstthird.split(" ")[0]}</div>

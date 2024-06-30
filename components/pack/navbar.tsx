@@ -16,41 +16,24 @@ import { ModeToggle } from "./themebutton"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, LayoutGrid } from "lucide-react"
+import { ChevronLeft, LayoutGrid, Settings } from "lucide-react"
+import GlobalSettings from "@/hooks/settings"
 
 export default function Navbar() {
   let rout = useRouter();
   return (
-    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl bg-gradient-to-tr from-slate-50 to-emerald-200 dark:from-slate-950 dark:to-emerald-950 bg-opacity-5 backdrop-blur-md justify-between px-5">
+    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl gradientline bg-opacity-5 backdrop-blur-md justify-between px-5">
       <MenubarMenu>
-        <MenubarTrigger>
-          <Link href={"/"}><LayoutGrid size={25} /></Link>
+        <MenubarTrigger className="hover:bg-transparent">
+          <Link className="hover:bg-transparent" href={"/"}><LayoutGrid size={25} /></Link>
         </MenubarTrigger>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>
-            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-          </MenubarItem>
-          <MenubarSeparator />
-          <MenubarSub>
-            <MenubarSubTrigger>Find</MenubarSubTrigger>
-            <MenubarSubContent>
-              <MenubarItem>Search the web</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Find...</MenubarItem>
-              <MenubarItem>Find Next</MenubarItem>
-              <MenubarItem>Find Previous</MenubarItem>
-            </MenubarSubContent>
-          </MenubarSub>
-          <MenubarSeparator />
-          <MenubarItem>Cut</MenubarItem>
-          <MenubarItem>Copy</MenubarItem>
-          <MenubarItem>Paste</MenubarItem>
+        <MenubarTrigger>
+          <Settings size={20} />
+        </MenubarTrigger>
+        <MenubarContent className="w-[60svh] -translate-x-6 px-2">
+          <GlobalSettings />
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>

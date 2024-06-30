@@ -15,7 +15,7 @@ export default async function SusMainPage({ raw_loc }: any) {
         <Image alt="dashboard" src={"/dashboard.svg"} className="absolute left-1/2 z-0 -translate-x-1/2 w-1/2 bg-opacity-75" width={100} height={50} priority={true} />
         <div className="w-full flex flex-col items-center p-2 bg-transparent">
           <div className="flex flex-row w-full justify-between items-center mb-4 text-sm text-white">
-            <div className="flex flex-row gap-2 items-center w-1/3">
+            <div className="flex flex-row gap-2 items-center z-10 w-1/3">
               <DisplayLocation latitude={raw_loc.latitude} longitude={raw_loc.longitude} />
               <ClientLocation />
             </div>

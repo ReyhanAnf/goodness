@@ -91,4 +91,7 @@
     .gradientcard{
       @apply dark:from-black dark:via-gray-950 dark:to-emerald-950 bg-gradient-to-tl from-emerald-200 to-emerald-50
     }
+    .gradientline{
+      @apply bg-gradient-to-tr from-slate-50 to-emerald-200 dark:from-slate-950 dark:to-emerald-950
+    }
   }
