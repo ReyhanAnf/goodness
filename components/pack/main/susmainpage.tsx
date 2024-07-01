@@ -5,9 +5,11 @@ import CurrentDate from "./date";
 import TimeClock from "./timeclock";
 import { get_current_pray } from "@/lib/get_location";
 import TimeOfPray from "./timeofpray";
+import { get_random_ayah } from "@/lib/get_surah";
 
 export default async function SusMainPage({ raw_loc }: any) {
   let raw_data = await get_current_pray(raw_loc.year, raw_loc.month, raw_loc.latitude, raw_loc.longitude);
+  let random_ayah = await get_random_ayah();
 
   return (
     <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3 mb-20">
@@ -22,7 +24,7 @@ export default async function SusMainPage({ raw_loc }: any) {
             <CurrentDate className="flex flex-col items-end z-30" />
           </div>
           <div className="dash-text-blur z-10 w-[90%] max-h-40 text-xs overflow-scroll">
-            <i>Boleh jadi kamu membenci sesuatu, padahal ia amat baik bagimu, dan boleh jadi (pula) kamu menyukai sesuatu, padahal ia amat buruk bagimu. Allah mengetahui, sedang kamu tidak mengetahui. QS Al Baqarah 216</i>
+            <i>{random_ayah.data.text}.<br /> QS {random_ayah.data.surah.englishName} : {random_ayah.data.numberInSurah}</i>
           </div>
           <TimeClock />
           <TimeOfPray nowDate={raw_loc.date} timings={raw_data.data} />

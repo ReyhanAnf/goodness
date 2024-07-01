@@ -1,80 +1,71 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { alquranali, font_kitab, arabnum } from "./surah";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { alquranali, arabnum } from "./surah";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionItem, AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
 import { Copy, Share } from "lucide-react";
 import AudioBar from "./audiobar";
 import { useEffect, useState } from "react";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
-import { Cabin } from "next/font/google";
-
 
 export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
   const Tajweed = require("tajweed").Tajweed;
 
   let ayahs_s = surah["data"][0]["ayahs"];
   let ayahs_t = surah["data"][1]["ayahs"];
-  let latin = surah["data"][2]["ayahs"]
-  let terjemahan = surah["data"][3]["ayahs"]
-  let tafsir = surah["data"][4]["ayahs"]
+  let latin = surah["data"][2]["ayahs"];
+  let terjemahan = surah["data"][3]["ayahs"];
+  let tafsir = surah["data"][4]["ayahs"];
 
-  let list_fontsize = ["lg", "xl", "2xl", "3xl", "4xl"]
+  let list_fontsize = ["lg", "xl", "2xl", "3xl", "4xl"];
 
   let parseTajweed = new Tajweed();
   let ayahsparse: any = [];
   if (tajweed) {
     ayahs_t.map((ayah: any) => {
       let parsestr = parseTajweed.parse(ayah.text, true);
-      ayahsparse.push(parsestr)
+      ayahsparse.push(parsestr);
     })
   } else {
     ayahs_s.map((ayah: any) => {
-      let parsestr = ayah.text
-      ayahsparse.push(parsestr)
+      let parsestr = ayah.text;
+      ayahsparse.push(parsestr);
     })
   }
-
 
   function choice_audio(arr: any, key: any) {
     let result = arr[0];
-
     arr.map((qor: any) => {
       if (qor) {
         if (qor?.edition?.identifier == key) {
-          result = qor
+          result = qor;
         }
       }
     })
-
     return result;
   }
 
-
   let [data_audio, setdataAudio] = useState(choice_audio(audio_surah.data, qori))
   useEffect(() => {
-    setdataAudio(choice_audio(audio_surah.data, qori))
+    setdataAudio(choice_audio(audio_surah.data, qori));
   }, [qori])
-
 
   const [toplay, setToplay] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const { load, play, pause } = useGlobalAudioPlayer();
+  const { load, pause } = useGlobalAudioPlayer();
 
   useEffect(() => {
-
     if (toplay != 0 || playing) {
       let element = document.getElementById(`ayah-${toplay - 1}`);
       element?.scrollIntoView({ behavior: "smooth" });
-
       if (toplay > data_audio.ayahs.length) {
         setToplay(0);
         setPlaying(false);
         pause();
       } else if (toplay <= 0 || data_audio.ayahs.length == 0) {
         setToplay(0);
-        setPlaying(false)
+        setPlaying(false);
         pause();
         return;
       } else {
@@ -98,9 +89,8 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
             }
           });
         }
-
         if (!playing) {
-          pause()
+          pause();
         }
       }
     }
@@ -147,8 +137,6 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
           </CardContent>
         </Card>
       ))}
-
-
     </div>
   )
 }

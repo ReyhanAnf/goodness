@@ -7,6 +7,7 @@ export async function get_meta_surah(){
   return res;
 }
 
+
 export async function get_surah(number_surah : any) {
     const req = await fetch(`https://api.alquran.cloud/v1/surah/${number_surah}/editions/quran-uthmani,quran-tajweed,en.transliteration,id.indonesian,id.jalalayn`, {cache : "force-cache"});
     const res = req.json()
@@ -119,10 +120,17 @@ export async function get_audio_surah(number_surah : any) {
       url += ","
     }
   })
-  console.log(url)
 
   const req = await fetch(url, {cache : "force-cache"});
   const res = req.json()
 
     return res;
+}
+
+export async function get_random_ayah() {
+  let random_ayah = Math.floor(Math.random() * 6214);
+  const req = await fetch(`https://api.alquran.cloud/v1/ayah/${random_ayah}/id.indonesian`, {cache : "no-store"});
+  const res = req.json();
+
+  return res;
 }

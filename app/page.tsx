@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import SusMainPage from "@/components/pack/main/susmainpage";
+import Credits from "@/components/pack/credits";
 
 
 export default function Page() {
@@ -17,9 +18,9 @@ export default function Page() {
   }
 
   return (
-    <main className="flex flex-col h-screen w-full dark:from-black dark:to-slate-950 bg-gradient-to-b from-slate-50 from-60 to-cyan-50 to-40">
+    <main className="flex flex-col h-screen w-full dark:from-black dark:to-slate-950 bg-gradient-to-b from-slate-50 from-60 to-cyan-50 to-40 mb-12">
       <SusMainPage raw_loc={location} />
-      <div className="content w-full bg-gradient-to-t dark:to-black dark:from-gray-950 rounded-t-3xl bg-slate-50 bg-opacity-5 backdrop-blur-sm pt-4 mt-10 mb-12 bottom-22 top-5 px-4 ">
+      <div className="content w-full bg-gradient-to-t dark:to-black dark:from-gray-950 rounded-t-3xl bg-slate-50 bg-opacity-5">
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-3 items-center bg-opacity-20  p-4">
           <Link href={"/al-qur_an"} className="menu-dash-item gradientcard bg-opacity-20 flex flex-col items-center">
             <Image src={"/al-quran.svg"} width={80} height={80} alt="al-quran" className="" />
@@ -45,6 +46,9 @@ export default function Page() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="mx-auto my-10">
+        <Credits />
       </div>
     </main>
   );

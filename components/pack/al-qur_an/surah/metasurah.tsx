@@ -39,7 +39,7 @@ export default function MetaSurah({ metasurah, setpTajweed, setpQori, pqori, set
         </Link>
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" className="pr-1">
+            <Button variant="ghost">
               <Bolt size="20" />
             </Button>
           </PopoverTrigger>

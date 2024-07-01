@@ -1,4 +1,5 @@
 import { Progress } from "@/components/ui/progress";
+import { setCookie } from "cookies-next";
 import { useState, useEffect } from "react";
 
 export default function ProgressAyah() {
@@ -19,7 +20,10 @@ export default function ProgressAyah() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     }
-  }, [])
+  }, []);
+
+
+  setCookie("lastscroll", Math.floor(scrolled));
   return (
     <Progress className="absolute left-0 bottom-0" value={scrolled} />
   )

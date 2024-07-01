@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import AyahsCard from "./ayah";
 import MetaSurah from "./metasurah";
 import { useState, useEffect } from "react";
+import { setCookie } from "cookies-next";
 
 
 
@@ -16,7 +17,9 @@ export default function ReadOneSurah({ surah, audio_surah, metasurah, idsurah }:
   const [playaudio_ayahs, setPlayaudio_ayahs] = useState([]);
 
   useEffect(() => {
-    window.localStorage.setItem(`surah_${idsurah}`, JSON.stringify(surah))
+    window.localStorage.setItem(`d_surah_${idsurah}`, JSON.stringify(surah));
+    setCookie("lastsurah", metasurah[idsurah - 1].nama_latin);
+    setCookie("lastidsurah", idsurah);
   }, [surah])
   return (
     <Card className="bg-slate-100 bg-opacity-5 backdrop-blur-sm p-0">

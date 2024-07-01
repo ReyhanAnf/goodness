@@ -8,15 +8,16 @@ import { getCookies } from "cookies-next";
 
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
-  let hour = getCookies()
+  let theme = getCookies().theme
 
 
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme={parseInt(hour.hour ? hour.hour : "0") >= 6 && parseInt(hour.hour ? hour.hour : "0") <= 18 ? "light" : "dark"}
+      defaultTheme="system"
       enableSystem
-      disableTransitionOnChange >
+      disableTransitionOnChange
+    >
       {children}
     </NextThemesProvider>
   )

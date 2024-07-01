@@ -83,7 +83,7 @@
       @apply w-full h-36 rounded-lg flex flex-1 justify-center items-center text-center shadow-md bg-opacity-45 backdrop-blur-sm
     }
     .nextpray {
-      @apply text-base font-bold dark:text-sky-100
+      @apply text-base font-bold dark:text-emerald-300 text-emerald-600
     }
     .gradientbg{
       @apply bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]   dark:from-emerald-950 dark:via-gray-950  dark:to-black from-emerald-100 via-emerald-100 to-slate-50
