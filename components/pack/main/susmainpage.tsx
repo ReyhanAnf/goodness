@@ -14,7 +14,7 @@ export default async function SusMainPage({ raw_loc }: any) {
   return (
     <div className="header w-full bg-gradient-to-b dark:from-emerald-950 dark:to-black from-emerald-800 to-slate-50 h-1/3 mb-20">
       <div className="w-full h-full">
-        <Image alt="dashboard" src={"/dashboard.svg"} className="absolute left-1/2 z-0 -translate-x-1/2 w-1/2 bg-opacity-75" width={100} height={50} priority={true} />
+        <Image alt="dashboard" src={"/dashboard.svg"} className="absolute left-1/2 z-0 -translate-x-1/2 w-1/2 bg-opacity-75 sm:scale-50" width={100} height={50} priority={true} />
         <div className="w-full flex flex-col items-center p-2 bg-transparent">
           <div className="flex flex-row w-full justify-between items-center mb-4 text-sm text-white">
             <div className="flex flex-row gap-2 items-center z-10 w-1/3">

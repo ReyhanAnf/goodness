@@ -6,7 +6,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import Navbar from "@/components/pack/navbar";
-
+import "./manifest.json";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 
 const ubuntu = Ubuntu({
@@ -27,12 +28,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  serviceWorkerRegistration.register();
 
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(
-        "min-h-screen bg-slate-200/90 dark:bg-black dark:from-black dark:to-slate-900 font-sans antialiased w-full basefont",
+        "min-h-screen w-full sm:mx-auto sm:w-[400px] bg-slate-200/90 dark:bg-black dark:from-black dark:to-slate-900 font-sans antialiased basefont",
         ubuntu.className
       )}>
         <Providers>
