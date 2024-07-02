@@ -94,7 +94,21 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
         }
       }
     }
-  }, [toplay, playing])
+  }, [toplay, playing]);
+
+
+  function copyContent(ayah: any) {
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(ayah)
+    }
+  }
+
+  function shareContent(ayah: any) {
+    if ("share" in navigator) {
+      navigator.share(ayah)
+    }
+  }
+
 
   return (
     <div className="scroll-smooth mb-12">
@@ -111,8 +125,25 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
             <CardTitle className={cn("text-xl w-10 h-10 rounded-xl  text-center pt-2 shadow-lg bg-emerald-200/35 bg-opacity-20 ", arabnum.className)}>{ayahs_s[index].numberInSurah}</CardTitle>
             <div className="flex w-2/3 gap-2 flex-row justify-end px-2 items-center">
               <AudioBar id={ayahs_s[index].numberInSurah} toplay={toplay} setToplay={setToplay} playing={playing} setPlaying={setPlaying} />
-              <Copy size={15} />
-              <Share size={15} />
+              <Copy size={15} className="cursor-pointer" onClick={() => {
+                let copyayah = `
+                ${ayahs_s[index].text} \n
+                ${terjemahan[index].text} \n
+                ${surah.data[0].englishName} : ${ayahs_s[index].numberInSurah}
+                `;
+
+                copyContent(copyayah);
+              }} />
+              <Share size={15} className="cursor-pointer" onClick={() => {
+                let shareayah = `
+                ${ayahs_s[index].text} \n
+                ${terjemahan[index].text} \n
+                ${surah.data[0].englishName} : ${ayahs_s[index].numberInSurah} \n
+                \n
+                `;
+
+                shareContent({ url: `https://muslim-goodness.vercel.app/al-qur_an/surah/${surah.data[0].number}`, text: shareayah, title: document.title });
+              }} />
             </div>
           </CardHeader>
           <CardContent >

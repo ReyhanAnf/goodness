@@ -1,5 +1,4 @@
-import { Copyright } from "lucide-react";
-import { Card } from "../ui/card";
+import { Info } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import Link from "next/link";
 
@@ -9,10 +8,21 @@ export default function Credits() {
   return (
     <Dialog>
       <DialogTrigger className="text-left w-full">
-        <Copyright size={20} />
+        <Info size={20} />
       </DialogTrigger>
       <DialogHeader>
         <DialogContent className="gradienbg max-h-screen overflow-y-scroll">
+          <DialogTitle className="text-xl">
+            Muslim Goodness
+          </DialogTitle>
+          <DialogDescription>
+            The daily goodness of Muslims ~ Aplikasi kebaikan muslim sehari hari
+          </DialogDescription>
+          <div>
+            <small>
+              Versi 0.1.0
+            </small>
+          </div>
           <DialogTitle className="text-xl">
             Terima Kasih
           </DialogTitle>

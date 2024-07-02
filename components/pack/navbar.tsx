@@ -17,7 +17,7 @@ import Credits from "./credits"
 export default function Navbar() {
   let rout = useRouter();
   return (
-    <Menubar className="fixed bottom-0 w-full h-14 rounded-t-3xl gradientline bg-opacity-5 backdrop-blur-md justify-evenly gap-2 px-4">
+    <Menubar className="fixed bottom-0 w-full sm:w-[400px] sm:mx-auto h-14 rounded-t-3xl gradientline bg-opacity-5 backdrop-blur-md justify-evenly gap-2 px-4">
       <MenubarMenu>
         <MenubarTrigger className="hover:bg-transparent">
           <Link className="hover:bg-transparent" href={"/"}><LayoutGrid size={25} /></Link>
