@@ -97,21 +97,21 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
   }, [toplay, playing]);
 
 
-  function copyContent(ayah: any) {
-    useEffect(() => {
-      if ("clipboard" in global.navigator) {
-        global.navigator.clipboard.writeText(ayah)
-      }
-    }, [])
-  }
+  //function copyContent(ayah: any) {
+   // useEffect(() => {
+   //   if ("clipboard" in global.navigator) {
+  //      global.navigator.clipboard.writeText(ayah)
+   //   }
+ //   }, [])
+//  }
 
-  function shareContent(ayah: any) {
-    useEffect(() => {
-      if ("share" in global.navigator) {
-        global.navigator.share(ayah)
-      }
-    }, [])
-  }
+//  function shareContent(ayah: any) {
+//    useEffect(() => {
+ //     if ("share" in global.navigator) {
+  //      global.navigator.share(ayah)
+ //     }
+ //   }, [])
+//  }
 
 
   return (
@@ -136,7 +136,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
                 ${surah.data[0].englishName} : ${ayahs_s[index].numberInSurah}
                 `;
 
-                copyContent(copyayah);
+                //copyContent(copyayah);
               }} />
               <Share size={15} className="cursor-pointer" onClick={() => {
                 let shareayah = `
@@ -145,8 +145,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
                 ${surah.data[0].englishName} : ${ayahs_s[index].numberInSurah} \n
                 \n
                 `;
-
-                shareContent({ url: `https://muslim-goodness.vercel.app/al-qur_an/surah/${surah.data[0].number}`, text: shareayah, title: document.title });
+                //shareContent({ url: `https://muslim-goodness.vercel.app/al-qur_an/surah/${surah.data[0].number}`, text: shareayah, title: document.title });
               }} />
             </div>
           </CardHeader>
