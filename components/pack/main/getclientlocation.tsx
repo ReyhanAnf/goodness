@@ -10,12 +10,12 @@ export default function ClientLocation() {
 
   useEffect(() => {
 
-    if ("geolocation" in navigator) {
-      navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+    if ("geolocation" in global.navigator) {
+      global.navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
         if (permissionStatus.state === 'denied') {
           window.location.href = "app-settings:location";
         } else {
-          navigator.geolocation.getCurrentPosition(function (position) {
+          global.navigator.geolocation.getCurrentPosition(function (position) {
             setCookie("latitude", `${position.coords.latitude}`);
             setCookie("longitude", `${position.coords.longitude}`);
             setCookie("date", date.getDate());
