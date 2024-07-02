@@ -98,15 +98,19 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
 
 
   function copyContent(ayah: any) {
-    if ("clipboard" in navigator) {
-      navigator.clipboard.writeText(ayah)
-    }
+    useEffect(() => {
+      if ("clipboard" in navigator) {
+        navigator.clipboard.writeText(ayah)
+      }
+    }, [])
   }
 
   function shareContent(ayah: any) {
-    if ("share" in navigator) {
-      navigator.share(ayah)
-    }
+    useEffect(() => {
+      if ("share" in navigator) {
+        navigator.share(ayah)
+      }
+    }, [])
   }
 
 

@@ -14,7 +14,6 @@ export default function ClientLocation() {
       navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
         if (permissionStatus.state === 'denied') {
           window.location.href = "app-settings:location";
-          window.location.href = "app-settings:translate";
         } else {
           navigator.geolocation.getCurrentPosition(function (position) {
             setCookie("latitude", `${position.coords.latitude}`);
