@@ -6,8 +6,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import Navbar from "@/components/pack/navbar";
-import "./manifest.json";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 
 const ubuntu = Ubuntu({
@@ -18,8 +16,24 @@ const ubuntu = Ubuntu({
 })
 
 export const metadata: Metadata = {
-  title: "Goodness",
-  description: "Subhanallah",
+  title: "Muslim Goodness",
+  description: "The Muslim App for daily goodness",
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  keywords: ["nextjs", "next14", "pwa", "next-pwa"],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  authors: [
+    {
+      name: "reyhananf",
+      url: "https://www.linkedin.com/in/reyhan-andrea-firdaus/",
+    },
+  ],
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
+  icons: [
+    { rel: "apple-touch-icon", url: "icons/icon128.png" },
+    { rel: "icon", url: "icons/icon128.png" },
+  ],
 };
 
 export default async function RootLayout({
@@ -28,7 +42,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  serviceWorkerRegistration.register();
 
 
   return (
