@@ -38,7 +38,7 @@ export default function AddToHome() {
           <li>1. Buka Web App <Link href="https://muslim-goodness.vercel.all">Muslim Goodness</Link></li>
           <li>2. Klik titik tiga di pojok kanan atas web browser </li>
            <li> 3. Klik Tambahkan Ke Layar Utama</li>
-            <Image className="mx-auto" src={"/addtohome.png"} width={150} height={300} />
+            <Image className="mx-auto" alt="guide-install" src={"/addtohome.png"} width={150} height={300} />
           </ul>
           </div>
         </DialogContent>
