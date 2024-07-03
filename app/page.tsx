@@ -48,7 +48,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="mx-auto my-10">
+      <div className="mx-auto my-5 mb-10 flex flex-row justify-evenly">
         <Credits />
         <AddToHome />
       </div>
