@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import SusMainPage from "@/components/pack/main/susmainpage";
 import Credits from "@/components/pack/credits";
+import AddToHome from "@/components/pack/addtohome";
 
 
 export default function Page() {
@@ -49,6 +50,7 @@ export default function Page() {
       </div>
       <div className="mx-auto my-10">
         <Credits />
+        <AddToHome />
       </div>
     </main>
   );
