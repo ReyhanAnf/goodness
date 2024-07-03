@@ -1,7 +1,7 @@
 import { Info } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import Link from "next/link";
-import Image from "next/image;
+import Image from "next/image";
 import {Button} from "../ui/button";
 
 export default function AddToHome() {
