@@ -91,8 +91,8 @@ export default function CurrentDate({ className }: any) {
     <div className={`${className} flex items-center gap-2 px-3 py-2 bg-white/20 dark:bg-black/30 backdrop-blur-sm border border-white/30 dark:border-gray-600/40 rounded-xl hover:bg-white/30 dark:hover:bg-black/40 transition-all duration-300`}>
       <Calendar size={16} className="text-emerald-200" />
       <div className="text-right">
-        <div className="text-sm font-medium text-white">{tampiltanggal_m}</div>
-        <div className={`${ubuntu.className} text-xs text-emerald-200`}>{tampiltanggal_h}</div>
+        <div className="text-sm font-medium text-white text-nowrap">{tampiltanggal_m}</div>
+        <div className={`${ubuntu.className} text-xs text-emerald-200 text-nowrap`}>{tampiltanggal_h}</div>
       </div>
     </div>
   )
