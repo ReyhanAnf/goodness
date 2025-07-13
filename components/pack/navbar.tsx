@@ -10,10 +10,18 @@ import { ModeToggle } from "./themebutton"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, LayoutGrid, RefreshCcwDot, Home, Settings } from "lucide-react"
+import { ChevronLeft, LayoutGrid, RefreshCcwDot, Home, Settings, Database } from "lucide-react"
 import GlobalSettings from "@/hooks/settings"
 import Credits from "./credits"
 import OfflineManager from "./offline-manager"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function Navbar() {
   let rout = useRouter();
@@ -42,12 +50,25 @@ export default function Navbar() {
         </MenubarMenu>
         
         <MenubarMenu>
-          <MenubarTrigger className="hover:bg-white/20 dark:hover:bg-black/30 rounded-xl transition-all duration-300 p-2">
-            <div className="flex flex-col items-center gap-1">
+          <Dialog>
+            <DialogTrigger asChild>
+              <MenubarTrigger className="hover:bg-white/20 dark:hover:bg-black/30 rounded-xl transition-all duration-300 p-2">
+                <div className="flex flex-col items-center gap-1">
+                  <Database size={20} className="text-green-600 dark:text-green-400" />
+                  <span className="text-xs text-gray-700 dark:text-gray-300">Offline</span>
+                </div>
+              </MenubarTrigger>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>Manajemen Data Offline</DialogTitle>
+                <DialogDescription>
+                  Unduh data Al-Qur'an untuk penggunaan offline
+                </DialogDescription>
+              </DialogHeader>
               <OfflineManager />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Offline</span>
-            </div>
-          </MenubarTrigger>
+            </DialogContent>
+          </Dialog>
         </MenubarMenu>
         
         <MenubarMenu>

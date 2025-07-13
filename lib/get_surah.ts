@@ -37,13 +37,15 @@ export async function get_meta_surah(){
     try {
       // Ambil dari database lokal
       const surahs = await db.surahs.toArray();
-      // console.log('Using offline data, surahs count:', surahs.length);
+      console.log('✅ Using offline data, surahs count:', surahs.length);
       return surahs;
     } catch (error) {
-      console.error('Error fetching from local database:', error);
+      console.error('❌ Error fetching from local database:', error);
       // Fallback ke API jika database error
     }
   }
+
+  console.log('📡 Using online API - offline data not available');
 
   // Fallback ke API - try multiple sources
   try {
@@ -52,14 +54,14 @@ export async function get_meta_surah(){
     const res = await req.json();
 
     if (res && Array.isArray(res)) {
-      // console.log('Using santrikoding API, surahs count:', res.length);
+      console.log('✅ Using santrikoding API, surahs count:', res.length);
   return res;
     } else if (res && res.data && Array.isArray(res.data)) {
-      // console.log('Using santrikoding API (nested), surahs count:', res.data.length);
+      console.log('✅ Using santrikoding API (nested), surahs count:', res.data.length);
       return res.data;
     }
   } catch (error) {
-    console.error('Error fetching from santrikoding API:', error);
+    console.error('❌ Error fetching from santrikoding API:', error);
   }
 
   try {
@@ -68,15 +70,15 @@ export async function get_meta_surah(){
     const res = await req.json();
     
     if (res && res.data && Array.isArray(res.data)) {
-      // console.log('Using alquran.cloud API, surahs count:', res.data.length);
+      console.log('✅ Using alquran.cloud API, surahs count:', res.data.length);
       return res.data;
     }
   } catch (error) {
-    console.error('Error fetching from alquran.cloud:', error);
+    console.error('❌ Error fetching from alquran.cloud:', error);
   }
 
   // Return empty array if all APIs fail
-  console.error('All API sources failed, returning empty array');
+  console.error('❌ All API sources failed, returning empty array');
   return [];
 }
 
@@ -91,6 +93,8 @@ export async function get_surah(number_surah : any) {
       const verses = await db.verses.where('surahNumber').equals(parseInt(number_surah)).toArray();
       
       if (surah && verses.length > 0) {
+        console.log(`✅ Using offline data for surah ${number_surah}, verses count:`, verses.length);
+        
         // Format data sesuai dengan struktur API
         const formattedData = {
           code: 200,
@@ -203,21 +207,26 @@ export async function get_surah(number_surah : any) {
         };
         
         return formattedData;
+      } else {
+        console.log(`❌ Offline data not found for surah ${number_surah}, falling back to API`);
       }
     } catch (error) {
-      console.error('Error fetching from local database:', error);
+      console.error('❌ Error fetching from local database:', error);
       // Fallback ke API jika database error
     }
+  } else {
+    console.log('📡 Offline data not available, using API');
   }
 
   // Fallback ke API jika offline data tidak tersedia
   try {
+    console.log(`📡 Fetching surah ${number_surah} from API...`);
     const req = await fetch(`https://api.alquran.cloud/v1/surah/${number_surah}/editions/quran-uthmani,quran-tajweed,en.transliteration,id.indonesian,id.jalalayn`, {cache : "force-cache"});
-    const res = req.json()
+    const res = await req.json();
 
     return res;
   } catch (error) {
-    console.error('Error fetching surah from API:', error);
+    console.error('❌ Error fetching surah from API:', error);
     // Return default data jika API gagal
     return {
       code: 500,

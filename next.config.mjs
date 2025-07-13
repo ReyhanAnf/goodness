@@ -15,6 +15,17 @@ export default withPWA({
     register: true,
     skipWaiting: true,
     clientsClaim: true,
+    // Use custom service worker
+    sw: '/sw-custom.js',
+    // Disable workbox service worker
+    disable: process.env.NODE_ENV === "development",
+    // Exclude problematic files from precaching
+    buildExcludes: [
+        /middleware-manifest\.json$/,
+        /_next\/app-build-manifest\.json$/,
+        /_next\/static\/.*\/_buildManifest\.js$/,
+        /_next\/static\/.*\/_ssgManifest\.js$/
+    ],
     runtimeCaching: [
         {
             urlPattern: ({ request }) => request.mode === 'navigate',
@@ -27,7 +38,23 @@ export default withPWA({
                 },
                 cacheableResponse: {
                     statuses: [0, 200]
-                }
+                },
+                networkTimeoutSeconds: 5,
+            },
+        },
+        {
+            urlPattern: /^https?.*\/api\/.*$/i,
+            handler: 'NetworkFirst',
+            options: {
+                cacheName: 'api-cache',
+                expiration: {
+                    maxEntries: 50,
+                    maxAgeSeconds: 24 * 60 * 60,
+                },
+                cacheableResponse: {
+                    statuses: [0, 200]
+                },
+                networkTimeoutSeconds: 3,
             },
         },
         {
@@ -55,11 +82,16 @@ export default withPWA({
                 },
                 cacheableResponse: {
                     statuses: [0, 200]
-                }
+                },
+                networkTimeoutSeconds: 5,
             },
         },
     ],
     fallbacks: {
         document: '/offline.html'
-    }
+    },
+    // Ensure offline.html is precached
+    additionalManifestEntries: [
+        { url: '/offline.html', revision: '1' }
+    ]
 })(nextConfig);
