@@ -6,6 +6,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import Navbar from "@/components/pack/navbar";
+import OfflineNotification from "@/components/pack/offline-notification";
 
 
 const ubuntu = Ubuntu({
@@ -51,6 +52,7 @@ export default async function RootLayout({
         ubuntu.className
       )}>
         <Providers>
+          <OfflineNotification />
           {children}
           <Navbar />
         </Providers>

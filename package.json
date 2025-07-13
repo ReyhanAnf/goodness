@@ -1,6 +1,6 @@
 {
   "name": "goodness",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,6 +26,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cookies-next": "^4.2.1",
+    "dexie": "^4.0.11",
+    "dexie-react-hooks": "^1.1.7",
     "embla-carousel-autoplay": "^8.1.5",
     "embla-carousel-react": "^8.1.5",
     "google-translate-api-x": "^10.6.8",
@@ -38,6 +40,7 @@
     "react-dom": "^18",
     "react-live-clock": "^6.1.23-beta",
     "react-use-audio-player": "^2.2.0",
+    "sonner": "^2.0.6",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "tajweed": "^1.1.1"

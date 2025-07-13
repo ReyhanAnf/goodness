@@ -1,7 +1,19 @@
+"use client"
+
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { alquranali } from "../al-qur_an/surah/surah";
+import localFont from "next/font/local";
 
+// Import font langsung untuk menghindari RSC bundler issues
+const alquranali = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/uthmani.otf', // path relatif dari /public
+      weight: '400'
+    }
+  ],
+  variable: '--font-alquranali'
+});
 
 export default function DialogDoa({ sabda }: any) {
 

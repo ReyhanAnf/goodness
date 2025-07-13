@@ -1,17 +1,29 @@
+"use client"
+
 import { Card } from "@/components/ui/card";
-import { alquranali } from "../al-qur_an/surah/surah";
+import localFont from "next/font/local";
 import { BACAAN_SHALAT, NIAT_SHALAT } from "@/lib/json/data";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@radix-ui/react-menubar";
 
+// Import font langsung untuk menghindari RSC bundler issues
+const alquranali = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/uthmani.otf', // path relatif dari /public
+      weight: '400'
+    }
+  ],
+  variable: '--font-alquranali'
+});
 
-export default async function ListNiatShalat() {
+export default function ListNiatShalat() {
 
   return (
     <div className="mb-14">
       <Card className="gradientcard my-2 border-0 ring-0 px-1">
         {NIAT_SHALAT.map((shalat: any) => (
-          <Dialog>
+          <Dialog key={shalat.name}>
             <DialogTrigger className="text-left w-full">
               <Card className="p-2 m-1 bg-slate-500 bg-opacity-5 text-left py-3">
                 {shalat.name}
@@ -37,7 +49,7 @@ export default async function ListNiatShalat() {
         ))}
         <Separator className="m-3" />
         {BACAAN_SHALAT.map((bacaan: any) => (
-          <Dialog>
+          <Dialog key={bacaan.name}>
             <DialogTrigger className="text-left w-full">
               <Card className="p-2 m-1 bg-slate-500 bg-opacity-5 text-left py-3">
                 {bacaan.name}
