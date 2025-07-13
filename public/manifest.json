@@ -120,13 +120,13 @@
   "screenshots": [
     {
       "src": "muslim-goodness.vercel.app.png",
-      "sizes": "1280x720",
+      "sizes": "1726x978",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
       "src": "muslim-goodness.vercel.app (1).png",
-      "sizes": "390x844",
+      "sizes": "385x927",
       "type": "image/png",
       "form_factor": "narrow"
     }

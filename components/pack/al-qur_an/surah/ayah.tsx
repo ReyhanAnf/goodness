@@ -21,30 +21,49 @@ import {
 export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize }: any) {
   const Tajweed = require("tajweed").Tajweed;
 
-  // Handle different data structures (online vs offline)
-  let ayahs_s, ayahs_t, latin, terjemahan, tafsir;
-  
-  if (surah.data && Array.isArray(surah.data)) {
-    // Online API structure: surah.data[0].ayahs
-    ayahs_s = surah.data[0]?.ayahs || [];
-    ayahs_t = surah.data[1]?.ayahs || [];
-    latin = surah.data[2]?.ayahs || [];
-    terjemahan = surah.data[3]?.ayahs || [];
-    tafsir = surah.data[4]?.ayahs || [];
-  } else if (surah.data && surah.data.ayahs) {
-    // Offline structure: surah.data.ayahs
-    ayahs_s = surah.data.ayahs || [];
-    ayahs_t = surah.data.ayahs || [];
-    latin = surah.data.ayahs || [];
-    terjemahan = surah.data.ayahs || [];
-    tafsir = surah.data.ayahs || [];
+  // Perbaiki deteksi sumber data (offline/online)
+  let sourceInfo = '';
+  let isOffline = false;
+  if (surah && surah.status === "OK" && surah.data && surah.data.ayahs) {
+    sourceInfo = 'Sumber data: Offline (IndexedDB/Cache)';
+    isOffline = true;
+  } else if (surah && surah.data && Array.isArray(surah.data)) {
+    sourceInfo = 'Sumber data: Online (API)';
+    isOffline = false;
   } else {
-    // Fallback
-    ayahs_s = [];
-    ayahs_t = [];
-    latin = [];
-    terjemahan = [];
-    tafsir = [];
+    sourceInfo = 'Sumber data: Tidak diketahui';
+  }
+
+  // Normalisasi struktur ayat agar komponen bisa handle offline & online
+  let ayahs_s: any[] = [], ayahs_t: any[] = [], latin: any[] = [], terjemahan: any[] = [], tafsir: any[] = [];
+  if (isOffline && surah.data) {
+    // Cek editions
+    const editions = surah.data.editions || [];
+    const findEdition = (identifier: string) => editions.find((ed: any) => ed.identifier === identifier);
+
+    const arabEdition = findEdition("quran-uthmani") || { surah: { ayahs: surah.data.ayahs || [] } };
+    const latinEdition = findEdition("en.transliteration");
+    const translationEdition = findEdition("id.indonesian");
+    const tafsirEdition = findEdition("id.tafsir");
+
+    ayahs_s = arabEdition?.surah?.ayahs || [];
+    ayahs_t = ayahs_s;
+    latin = (latinEdition?.surah?.ayahs || []).map((a: any) => ({ text: a.text }));
+    terjemahan = (translationEdition?.surah?.ayahs || []).map((a: any) => ({ text: a.text }));
+    tafsir = (tafsirEdition?.surah?.ayahs || []).map((a: any) => ({ text: a.text }));
+  } else if (surah.data && Array.isArray(surah.data)) {
+    // Online: cari edition berdasarkan identifier
+    const findEdition = (identifier: string) => surah.data.find((ed: any) => ed.edition?.identifier === identifier);
+    const arabEdition = findEdition("ar.alafasy") || findEdition("ar.quran-simple") || surah.data[0];
+    const latinEdition = findEdition("en.transliteration") || findEdition("id.transliteration") || findEdition("latin") || {};
+    const translationEdition = findEdition("id.indonesian") || findEdition("id.translation") || {};
+    const tafsirEdition = findEdition("id.tafsir") || {};
+
+    ayahs_s = arabEdition?.ayahs || [];
+    ayahs_t = arabEdition?.ayahs || [];
+    latin = (latinEdition?.ayahs || []).map((a: any) => ({ text: a.text }));
+    terjemahan = (translationEdition?.ayahs || []).map((a: any) => ({ text: a.text }));
+    tafsir = (tafsirEdition?.ayahs || []).map((a: any) => ({ text: a.text }));
   }
 
   let list_fontsize = ["lg", "xl", "2xl", "3xl", "4xl"];
@@ -236,7 +255,12 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
     
     if (toplay != 0 || playing) {
       let element = document.getElementById(`ayah-${toplay - 1}`);
-      element?.scrollIntoView({ behavior: "smooth" });
+      if (element) {
+        // Scroll ke tengah/atas viewport dengan offset
+        const yOffset = 400; // offset px dari atas viewport (misal, header tinggi 100-120px)
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset - window.innerHeight / 4;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
       if (toplay > data_audio.ayahs.length) {
         setToplay(0);
         setPlaying(false);
@@ -248,7 +272,7 @@ export default function AyahsCard({ surah, audio_surah, tajweed, qori, fontsize 
         return;
       } else {
         if (toplay == 1 && data_audio.numberOfAyahs != 1) {
-          load("https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3", {
+          load("../../../../../audio/1.mp3", {
             autoplay: true,
             onend: () => {
               load(data_audio.ayahs[toplay - 1].audio, {

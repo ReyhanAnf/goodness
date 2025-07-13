@@ -1,5 +1,13 @@
 import { db, dbHelpers } from './db';
 
+// ===== Memory Cache Global untuk Semua Data =====
+const memoryCache = new Map<string, any>();
+
+// Helper untuk generate key cache
+function getCacheKey(type: string, key: any) {
+  return `${type}:${key}`;
+}
+
 export async function get_surah_description(surahNumber: number) {
   try {
     // Try to get detailed surah info from santrikoding API
@@ -83,6 +91,12 @@ export async function get_meta_surah(){
 }
 
 export async function get_surah(number_surah : any) {
+  // ===== Cek Memory Cache =====
+  const cacheKey = getCacheKey('surah', number_surah);
+  if (memoryCache.has(cacheKey)) {
+    return memoryCache.get(cacheKey);
+  }
+
   // Cek apakah data offline tersedia
   const isOfflineAvailable = await dbHelpers.isDataDownloaded();
   
@@ -91,7 +105,7 @@ export async function get_surah(number_surah : any) {
       // Ambil surah dari database lokal
       const surah = await db.surahs.where('number').equals(parseInt(number_surah)).first();
       const verses = await db.verses.where('surahNumber').equals(parseInt(number_surah)).toArray();
-      
+      console.log('[get_surah] Dari IndexedDB:', { surah, versesCount: verses.length, verses });
       if (surah && verses.length > 0) {
         console.log(`✅ Using offline data for surah ${number_surah}, verses count:`, verses.length);
         
@@ -206,16 +220,18 @@ export async function get_surah(number_surah : any) {
           }
         };
         
+        // ===== Simpan ke Memory Cache =====
+        memoryCache.set(cacheKey, formattedData);
         return formattedData;
       } else {
-        console.log(`❌ Offline data not found for surah ${number_surah}, falling back to API`);
+        console.log(`[get_surah] Offline data not found for surah ${number_surah}, fallback ke API`);
       }
     } catch (error) {
-      console.error('❌ Error fetching from local database:', error);
+      console.error('[get_surah] Error fetching from local database:', error);
       // Fallback ke API jika database error
     }
   } else {
-    console.log('📡 Offline data not available, using API');
+    console.log(`[get_surah] Offline data not available, fallback ke API untuk surah ${number_surah}`);
   }
 
   // Fallback ke API jika offline data tidak tersedia
@@ -224,6 +240,8 @@ export async function get_surah(number_surah : any) {
     const req = await fetch(`https://api.alquran.cloud/v1/surah/${number_surah}/editions/quran-uthmani,quran-tajweed,en.transliteration,id.indonesian,id.jalalayn`, {cache : "force-cache"});
     const res = await req.json();
 
+    // ===== Simpan ke Memory Cache =====
+    memoryCache.set(cacheKey, res);
     return res;
   } catch (error) {
     console.error('❌ Error fetching surah from API:', error);
@@ -503,5 +521,77 @@ export async function get_random_ayah() {
         }
       }
     };
+  }
+}
+
+// ===== Ambil ayat individual dari cache, IndexedDB, atau API =====
+export async function get_ayah(surahNumber: number, ayahNumber: number) {
+  const cacheKey = getCacheKey('ayah', `${surahNumber}:${ayahNumber}`);
+  if (memoryCache.has(cacheKey)) {
+    return memoryCache.get(cacheKey);
+  }
+
+  // Cek IndexedDB
+  if (db) {
+    try {
+      const ayah = await db.verses.where({ surahNumber, verseNumber: ayahNumber }).first();
+      if (ayah) {
+        memoryCache.set(cacheKey, ayah);
+        return ayah;
+      }
+    } catch (error) {
+      console.error('Error fetching ayah from IndexedDB:', error);
+    }
+  }
+
+  // Fallback ke API jika tidak ada di cache/IndexedDB
+  try {
+    const req = await fetch(`https://api.alquran.cloud/v1/ayah/${surahNumber}:${ayahNumber}/editions/quran-uthmani,id.indonesian`, { cache: "force-cache" });
+    const res = await req.json();
+    // Simpan ke IndexedDB jika memungkinkan
+    if (db && res && res.data && Array.isArray(res.data)) {
+      // Ambil data dari editions
+      const uthmani = res.data.find((e: any) => e.identifier === 'quran-uthmani');
+      const indonesian = res.data.find((e: any) => e.identifier === 'id.indonesian');
+      if (uthmani && uthmani.surah && uthmani.ayahs && uthmani.ayahs.length > 0) {
+        const ayahData = uthmani.ayahs[0];
+        const ayahObj = {
+          surahNumber: surahNumber,
+          verseNumber: ayahData.numberInSurah,
+          text: {
+            arab: ayahData.text,
+            transliteration: ''
+          },
+          translations: {
+            id: indonesian?.ayahs?.[0]?.text || '',
+            en: ''
+          },
+          audio: {
+            primary: '',
+            secondary: []
+          },
+          tafsir: {
+            id: ''
+          },
+          juz: ayahData.juz,
+          hizb: ayahData.hizbQuarter,
+          page: ayahData.page,
+          sajda: ayahData.sajda || false
+        };
+        try {
+          await db.verses.put(ayahObj);
+        } catch (err) {
+          // ignore error
+        }
+        memoryCache.set(cacheKey, ayahObj);
+        return ayahObj;
+      }
+    }
+    // Jika struktur tidak sesuai, simpan response mentah ke cache
+    memoryCache.set(cacheKey, res);
+    return res;
+  } catch (error) {
+    console.error('Error fetching ayah from API:', error);
+    return null;
   }
 }

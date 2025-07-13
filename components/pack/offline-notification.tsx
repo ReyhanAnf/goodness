@@ -25,12 +25,14 @@ export default function OfflineNotification() {
       // Hide notification after 3 seconds
       setTimeout(() => setShowNotification(false), 3000);
     };
-
+    
     const handleOffline = () => {
       setIsOnline(false);
       setIsOffline(true);
       setShowNotification(true);
       console.log('📴 Connection lost');
+      // Hide notification after 3 seconds
+      setTimeout(() => setShowNotification(false), 3000);
     };
 
     // Add event listeners

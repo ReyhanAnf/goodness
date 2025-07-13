@@ -17,7 +17,7 @@ export default async function SusMainPage({ raw_loc }: any) {
         <Image 
           alt="dashboard" 
           src="/dashboard.svg" 
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-auto max-w-md" 
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-auto h-auto max-w-md" 
           width={400} 
           height={200} 
           priority={true} 
