@@ -2,37 +2,64 @@ import withPWA from 'next-pwa';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,      // Enable React strict mode for improved error handling
-    swcMinify: true,            // Enable SWC minification for improved performance
+    reactStrictMode: true,
+    swcMinify: true,
     compiler: {
-        removeConsole: process.env.NODE_ENV !== "development"     // Remove console.log in production
+        removeConsole: process.env.NODE_ENV !== "development"
     }
 };
 
 export default withPWA({
-    dest: "public",         // destination directory for the PWA files
-    disable: process.env.NODE_ENV === "development",        // disable PWA in the development environment
-    register: true,         // register the PWA service worker
-    skipWaiting: true,      // skip waiting for service worker activation
+    dest: "public",
+    disable: false, // Enable PWA in all environments
+    register: true,
+    skipWaiting: true,
+    clientsClaim: true,
     runtimeCaching: [
         {
-          urlPattern: ({ request }) => request.mode === 'navigate',
-          handler: 'NetworkFirst', // Coba jaringan dulu, jika offline baru ambil dari cache.
-          options: {
-            cacheName: 'pages',
-            expiration: {
-              maxEntries: 60,
-              maxAgeSeconds: 30 * 24 * 60 * 60, // Cache selama 30 hari
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+                cacheName: 'pages',
+                expiration: {
+                    maxEntries: 50,
+                    maxAgeSeconds: 24 * 60 * 60,
+                },
+                cacheableResponse: {
+                    statuses: [0, 200]
+                }
             },
-          },
         },
         {
-          // Ini aturan untuk caching file statis seperti CSS, JS, font, gambar.
-          urlPattern: /\.(?:css|js|woff2|png|jpg|jpeg|svg)$/,
-          handler: 'CacheFirst', // Ambil dari cache dulu agar loading cepat.
-          options: {
-            cacheName: 'static-assets',
-          },
+            urlPattern: /\.(?:css|js|woff2|woff|ttf|otf|png|jpg|jpeg|svg|gif|ico|webp|mp3|wav|ogg|m4a|json)$/,
+            handler: 'CacheFirst',
+            options: {
+                cacheName: 'static-assets',
+                expiration: {
+                    maxEntries: 100,
+                    maxAgeSeconds: 30 * 24 * 60 * 60,
+                },
+                cacheableResponse: {
+                    statuses: [0, 200]
+                }
+            },
         },
-      ],
+        {
+            urlPattern: /.*/,
+            handler: 'NetworkFirst',
+            options: {
+                cacheName: 'fallback-cache',
+                expiration: {
+                    maxEntries: 30,
+                    maxAgeSeconds: 24 * 60 * 60,
+                },
+                cacheableResponse: {
+                    statuses: [0, 200]
+                }
+            },
+        },
+    ],
+    fallbacks: {
+        document: '/offline.html'
+    }
 })(nextConfig);

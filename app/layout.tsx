@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import Navbar from "@/components/pack/navbar";
 import OfflineNotification from "@/components/pack/offline-notification";
+import ServiceWorkerRegister from "@/components/pack/service-worker-register";
 
 
 const ubuntu = Ubuntu({
@@ -52,6 +53,7 @@ export default async function RootLayout({
         ubuntu.className
       )}>
         <Providers>
+          <ServiceWorkerRegister />
           <OfflineNotification />
           {children}
           <Navbar />

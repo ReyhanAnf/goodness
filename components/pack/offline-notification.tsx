@@ -1,88 +1,53 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { useOffline } from '@/hooks/use-offline';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Download, X, WifiOff } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Wifi, WifiOff, Download, CheckCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function OfflineNotification() {
-  const { isAvailable, isDownloading, downloadData } = useOffline();
-  const [showNotification, setShowNotification] = useState(false);
-  const [hasShownBefore, setHasShownBefore] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+  const [showOfflineMessage, setShowOfflineMessage] = useState(false);
 
   useEffect(() => {
-    // Cek apakah sudah pernah ditampilkan sebelumnya
-    const shown = localStorage.getItem('offline-notification-shown');
-    if (shown) {
-      setHasShownBefore(true);
-      return;
-    }
+    // Set initial online status
+    setIsOnline(navigator.onLine);
 
-    // Tampilkan notifikasi jika data belum tersedia offline
-    if (!isAvailable && !isDownloading) {
-      // Delay sedikit untuk memastikan komponen sudah ter-render
-      const timer = setTimeout(() => {
-        setShowNotification(true);
-      }, 2000);
+    // Listen for online/offline events
+    const handleOnline = () => {
+      setIsOnline(true);
+      setShowOfflineMessage(false);
+      toast.success('Koneksi internet telah pulih', {
+        description: 'Aplikasi kembali online',
+        duration: 3000,
+      });
+    };
 
-      return () => clearTimeout(timer);
-    }
-  }, [isAvailable, isDownloading]);
+    const handleOffline = () => {
+      setIsOnline(false);
+      setShowOfflineMessage(true);
+      toast.error('Tidak ada koneksi internet', {
+        description: 'Anda dalam mode offline',
+        duration: 5000,
+      });
+    };
 
-  const handleDownload = async () => {
-    setShowNotification(false);
-    localStorage.setItem('offline-notification-shown', 'true');
-    await downloadData();
-  };
+    // Add event listeners
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
-  const handleDismiss = () => {
-    setShowNotification(false);
-    localStorage.setItem('offline-notification-shown', 'true');
-  };
+    // Cleanup
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
-  if (!showNotification || hasShownBefore || isAvailable || isDownloading) {
+  if (!showOfflineMessage && isOnline) {
     return null;
   }
 
   return (
-    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm mx-4">
-      <Alert className="border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800">
-        <div className="flex items-start gap-3">
-          <WifiOff className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5" />
-          <div className="flex-1">
-            <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-              Aktifkan mode offline untuk membaca Al-Qur'an tanpa internet
-            </AlertDescription>
-            <div className="flex gap-2 mt-3">
-              <Button 
-                size="sm" 
-                onClick={handleDownload}
-                className="bg-green-600 hover:bg-green-700 text-white"
-              >
-                <Download className="h-3 w-3 mr-1" />
-                Download
-              </Button>
-              <Button 
-                size="sm" 
-                variant="ghost" 
-                onClick={handleDismiss}
-                className="text-green-600 hover:text-green-700"
-              >
-                Nanti
-              </Button>
-            </div>
-          </div>
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            onClick={handleDismiss}
-            className="text-green-600 hover:text-green-700 p-1 h-auto"
-          >
-            <X className="h-3 w-3" />
-          </Button>
-        </div>
-      </Alert>
+    <div className="fixed top-0 left-0 right-0 z-50">
     </div>
   );
 } 

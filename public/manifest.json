@@ -1,12 +1,16 @@
 {
-  "name": "Muslim Goodness",
-  "short_name": "Goodness",
+  "name": "Muslim Goodness - Al-Qur'an & Islamic Apps",
+  "short_name": "Muslim Goodness",
+  "description": "Aplikasi Al-Qur'an, Doa, Hadits, dan Asmaul Husna yang dapat diakses offline",
   "theme_color": "#0c2715",
   "background_color": "#84B08D",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
+  "categories": ["education", "lifestyle", "religious"],
+  "lang": "id",
+  "dir": "ltr",
   "icons": [
     {
       "src": "icons/icon48.png",
@@ -61,6 +65,70 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Al-Qur'an",
+      "short_name": "Qur'an",
+      "description": "Baca Al-Qur'an",
+      "url": "/al-qur_an",
+      "icons": [
+        {
+          "src": "al-quran.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Asmaul Husna",
+      "short_name": "Asmaul",
+      "description": "Baca Asmaul Husna",
+      "url": "/asmaulhusna",
+      "icons": [
+        {
+          "src": "asmaulhusna.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Doa Harian",
+      "short_name": "Doa",
+      "description": "Baca doa harian",
+      "url": "/doa",
+      "icons": [
+        {
+          "src": "pray.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Hadits",
+      "short_name": "Hadits",
+      "description": "Baca hadits",
+      "url": "/hadits",
+      "icons": [
+        {
+          "src": "hadits.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "muslim-goodness.vercel.app.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "muslim-goodness.vercel.app (1).png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ],
   "splash_pages": null

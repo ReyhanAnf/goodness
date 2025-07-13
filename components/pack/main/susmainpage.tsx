@@ -28,7 +28,7 @@ export default async function SusMainPage({ raw_loc }: any) {
       <div className="relative z-10 w-full h-full px-4 py-6 sm:px-6 sm:py-8">
         <div className="max-w-4xl mx-auto">
           {/* Top Bar - Location and Date */}
-          <div className="flex flex-row flex-nowrap justify-between items-center mb-6 space-y-3 sm:space-y-0">
+          <div className="flex flex-row flex-nowrap justify-between items-start mb-6 space-y-3 sm:space-y-0">
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center">
               <DisplayLocation latitude={raw_loc.latitude} longitude={raw_loc.longitude} />
             </div>
